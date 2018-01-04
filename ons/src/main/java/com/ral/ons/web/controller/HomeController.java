@@ -1,4 +1,4 @@
-package com.ral.shop.web.controller;
+package com.ral.ons.web.controller;
 
 import com.ral.dao.member.MemberMapper;
 import com.ral.model.entity.member.MemberExample;
@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Created by victor on 2018/1/4.
+ * @author victor
+ * @desc
+ * @date 2018/1/5 0:40
  */
 @RestController
 public class HomeController {
@@ -36,5 +38,4 @@ public class HomeController {
         return Result.initSuccessResult(memberMapper.selectByExample(new MemberExample()),null);
 
     }
-
 }
