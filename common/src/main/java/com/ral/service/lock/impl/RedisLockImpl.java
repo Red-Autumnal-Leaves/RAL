@@ -31,18 +31,18 @@ public class RedisLockImpl implements IRedisLock {
 			String value = JSONUtils.toJson(createMeta(exprie));
 			String lockKey = this.getLockKeyPrev() + key;
 			if (redisService.setnx(lockKey, value) == 1) {
-				logger.info("Get redis lock success, key =" + lockKey);
+				logger.debug("Get redis lock success, key =" + lockKey);
 				return true;
 			}
 			value = redisService.get(lockKey);
 			if (StringUtils.isNullOrEmpty(value)) {
 				redisService.del(lockKey);
-				logger.info("Redis unlock success ,key = " + lockKey);
+				logger.debug("Redis unlock success ,key = " + lockKey);
 				Thread.sleep(1000);
 				value = JSONUtils.toJson(createMeta(exprie));
 				if (redisService.setnx(lockKey, value) == 1) {
 					redisService.expire(lockKey, exprie);
-					logger.info("Get redis lock success, key =" + lockKey);
+					logger.debug("Get redis lock success, key =" + lockKey);
 					return true;
 				} else {
 					logger.warn("Get redis lock fail, key =" + lockKey);
@@ -55,7 +55,7 @@ public class RedisLockImpl implements IRedisLock {
 				value = JSONUtils.toJson(createMeta(exprie));
 				if (redisService.setnx(lockKey, value) == 1) {
 					redisService.expire(lockKey, exprie);
-					logger.info("Get redis lock success, key =" + lockKey);
+					logger.debug("Get redis lock success, key =" + lockKey);
 					return true;
 				} else {
 					logger.warn("Get redis lock fail, key =" + lockKey);
@@ -79,7 +79,7 @@ public class RedisLockImpl implements IRedisLock {
 		} catch (Exception ex) {
 			logger.error(ex.getMessage());
 		}
-		logger.info("Redis unlock success ,key = " + lockKey);
+		logger.debug("Redis unlock success ,key = " + lockKey);
 	}
 
 	private LockMeta createMeta(int exprie) {

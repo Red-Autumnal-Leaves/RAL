@@ -43,7 +43,7 @@ public class RedisConfiguration {
 	public JedisPool getJedisPool(){
 		JedisPoolConfig config = getRedisConfig();
 		JedisPool pool = new JedisPool(config,hostName,port,timeout,password,dbIndex);
-		logger.info("init JredisPool ...");
+		logger.debug("init JredisPool ...");
 		return pool;
 	}
 	
@@ -53,7 +53,7 @@ public class RedisConfiguration {
         JedisConnectionFactory factory = new JedisConnectionFactory();  
         JedisPoolConfig config = getRedisConfig();  
         factory.setPoolConfig(config);  
-        logger.info("JedisConnectionFactory bean init success.");  
+        logger.debug("JedisConnectionFactory bean init success.");
         return factory;  
     }  
     
@@ -71,7 +71,6 @@ public class RedisConfiguration {
         RedisMessageListenerContainer container = new RedisMessageListenerContainer();
         container.setConnectionFactory(getConnectionFactory());
         Topic topic = new ChannelTopic("__keyevent@"+ getDbIndex() +"__:expired");
-        System.out.println("Redis db index : " + getDbIndex());
         container.addMessageListener(keyEventMessageListener,topic);
         return container;
     }

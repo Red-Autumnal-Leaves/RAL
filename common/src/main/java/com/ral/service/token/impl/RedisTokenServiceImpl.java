@@ -88,7 +88,7 @@ public class RedisTokenServiceImpl implements IRedisTokenService {
 		}
 		String key = getKey(token.getTokenId());
 		redisService.setex(key, seconds, token.getToken());
-		logger.info("Create new token ,tokenId:!" + token.getTokenId());
+		logger.debug("Create new token ,tokenId:!" + token.getTokenId());
 		return true;
 	}
 

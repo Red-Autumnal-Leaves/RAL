@@ -11,9 +11,6 @@ import com.ral.model.domain.OssUploadResponse;
 import com.ral.service.file.IFileStoreService;
 import com.ral.util.codec.StringUtils;
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -24,18 +21,20 @@ import java.util.Date;
 /**
  * 阿里云OSS上传实现类
  */
-@Service
 public class OssFileStoreServiceImpl implements IFileStoreService {
 	
 	private static Logger logger = Logger.getLogger(OssFileStoreServiceImpl.class);
 
-	@Value("${aliyun.oss.endpoint}")
+	public OssFileStoreServiceImpl(String endpoint,String key,String secret){
+		this.endpoint = endpoint;
+		this.key = key;
+		this.secret = secret;
+	}
+
 	private String endpoint;
 
-	@Value("${aliyun.oss.key}")
 	private String key;
 
-	@Value("${aliyun.oss.secret}")
 	private String secret;
 	
 	private static long expires = 1000 * 60 * 60 * 24 * 365 * 100;//100年
@@ -204,27 +203,8 @@ public class OssFileStoreServiceImpl implements IFileStoreService {
 		return null;
 	}
 
-	public String getEndpoint() {
-		return endpoint;
-	}
-
-	public void setEndpoint(String endpoint) {
-		this.endpoint = endpoint;
-	}
-
-	public String getKey() {
-		return key;
-	}
-
-	public void setKey(String key) {
-		this.key = key;
-	}
-
-	public String getSecret() {
-		return secret;
-	}
-
-	public void setSecret(String secret) {
-		this.secret = secret;
+	@Override
+	public void testConfig() {
+		System.out.println(this.endpoint);
 	}
 }

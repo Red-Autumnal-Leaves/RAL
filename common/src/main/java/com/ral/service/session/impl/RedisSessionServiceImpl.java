@@ -8,6 +8,7 @@ import com.ral.service.session.IRedisSessionService;
 import com.ral.util.codec.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,14 +17,17 @@ import java.util.Map;
 @Service
 public class RedisSessionServiceImpl implements IRedisSessionService {
 
+	private static Logger logger = Logger.getLogger(RedisSessionServiceImpl.class);
+
+	@Value("${redis.session.prefix}")
+	private String prefix;
+
 	@Autowired
 	private IRedisService redisService;
 	
-	private static Logger logger = Logger.getLogger(RedisSessionServiceImpl.class);
-	
 	@Override
 	public String getKey() {
-		return RedisKeyConstants.DEFAULT_SESSION_KEY;
+		return StringUtils.isNullOrEmpty(prefix) ? RedisKeyConstants.DEFAULT_SESSION_KEY : prefix;
 	}
 
 	@Override
@@ -44,7 +48,7 @@ public class RedisSessionServiceImpl implements IRedisSessionService {
 	public void createSession(String sessionId){
 		if(!isExist(sessionId)){
 			redisService.hset(getKey(sessionId), "sessionId", sessionId);
-			logger.info("created session sessionId:" + sessionId);
+			logger.debug("created session sessionId:" + sessionId);
 		}
 		redisService.expire(getKey(sessionId), getExpire());
 	}
@@ -52,7 +56,7 @@ public class RedisSessionServiceImpl implements IRedisSessionService {
 	public void createSession(String sessionId,int interval){
 		if(!isExist(sessionId)){
 			redisService.hset(getKey(sessionId), "sessionId", sessionId);
-			logger.info("created session sessionId:" + sessionId);
+			logger.debug("created session sessionId:" + sessionId);
 		}
 		redisService.expire(getKey(sessionId), interval);
 	}
@@ -100,4 +104,11 @@ public class RedisSessionServiceImpl implements IRedisSessionService {
 		return session.get(name);
 	}
 
+	public String getPrefix() {
+		return prefix;
+	}
+
+	public void setPrefix(String prefix) {
+		this.prefix = prefix;
+	}
 }

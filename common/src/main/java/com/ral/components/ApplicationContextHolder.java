@@ -17,7 +17,7 @@ public class ApplicationContextHolder implements ApplicationContextAware{
 	@Override
 	public void setApplicationContext(ApplicationContext context) throws BeansException {
 		appContext =  context;
-		logger.info("ApplicationContext init ...");
+		logger.debug("ApplicationContext init ...");
 	}
 	@SuppressWarnings("unchecked")
 	public static <T> T getBean(String beanName){

@@ -35,7 +35,7 @@ public final class ImageUtils {
 			Thumbnails.of(sourceFileName).scale(ratio).toFile(newFileName);
 		} catch (IOException e) {
 			e.printStackTrace();
-			logger.info("scale image("+sourceFileName+") error.",e);
+			logger.debug("scale image("+sourceFileName+") error.",e);
 		}
 	}
 	
@@ -52,7 +52,7 @@ public final class ImageUtils {
 			Thumbnails.of(sourceFileName).size(width, height).keepAspectRatio(keepAspectRatio).toFile(newFileName);
 		} catch (IOException e) {
 			e.printStackTrace();
-			logger.info("scale image("+sourceFileName+") error.",e);
+			logger.error("scale image("+sourceFileName+") error.",e);
 		} 
 	}
 	
@@ -68,7 +68,7 @@ public final class ImageUtils {
 			Thumbnails.of(sourceFileName).rotate(rotate).toFile(newFileName);
 		} catch (IOException e) {
 			e.printStackTrace();
-			logger.info("scale rotate("+sourceFileName+") error.",e);
+			logger.error("scale rotate("+sourceFileName+") error.",e);
 		}   
 	}
 	
@@ -99,7 +99,7 @@ public final class ImageUtils {
 			.toFile(newFileName);
 		} catch (IOException e) {
 			e.printStackTrace();
-			logger.info("scale watermark("+sourceFileName+") error.",e);
+			logger.error("scale watermark("+sourceFileName+") error.",e);
 		}  
 	}
 	
@@ -115,7 +115,7 @@ public final class ImageUtils {
 			Thumbnails.of(image).size(image.getWidth(), image.getHeight()).outputFormat(format).toFile(newFileName);
 		} catch (IOException e) {
 			e.printStackTrace();
-			logger.info("scale format("+sourceFileName+") error.",e);
+			logger.error("scale format("+sourceFileName+") error.",e);
 		}   
 	}
 	

@@ -49,7 +49,7 @@ public class KeyEventMessageListener implements MessageListener{
 		String eventId = EventUtils.getEventId(key);
 		if(!StringUtils.isNullOrEmpty(eventId)){
 			if(redisLock.lock(eventId, 300)){//must executed in 300S
-				logger.info("Handle event :" + eventId + " start !");
+				logger.debug("Handle event :" + eventId + " start !");
 				try{
 					handler(eventId);
 				}catch (Exception ex) {
@@ -61,7 +61,7 @@ public class KeyEventMessageListener implements MessageListener{
 					redisService.hdel(EventConstants.KEY_EVENT_DATA_MAP, EventUtils.getDataKey(eventId),EventUtils.getMetaKey(eventId));
 					redisLock.unlock(eventId);
 				}
-				logger.info("Handle event :" + eventId + " end!");
+				logger.debug("Handle event :" + eventId + " end!");
 			}else{// event was handled or is handling
 				logger.debug("Event is handled");
 			}
@@ -72,7 +72,7 @@ public class KeyEventMessageListener implements MessageListener{
 		String data = redisService.hget(EventConstants.KEY_EVENT_DATA_MAP,EventUtils.getDataKey(eventId));
 		String meta = redisService.hget(EventConstants.KEY_EVENT_DATA_MAP,EventUtils.getMetaKey(eventId));
 		if(StringUtils.isNullOrEmpty(data) || StringUtils.isNullOrEmpty(meta)){// event was handled
-			logger.info("Event was handled, eventId:" + eventId + ".");
+			logger.debug("Event was handled, eventId:" + eventId + ".");
 			return;
 		}
 		int event = Integer.parseInt(meta);

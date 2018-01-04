@@ -30,14 +30,14 @@ public class JvmLockImpl implements IJvmLock {
         	if(meta.isLose()){//已经超时 释放
         		unlock(key);
         	}else{
-        		logger.info("key:" + key + "获取JVM锁失败");
+        		logger.debug("key:" + key + "获取JVM锁失败");
         		 return false;
         	}
         }
         lock.lock();
         try {
             if (map.containsKey(key)) {
-            	logger.info("key:"+key+"获取JVM锁失败");
+            	logger.debug("key:"+key+"获取JVM锁失败");
                 return false;
             }
             LockMeta meta = new LockMeta();
@@ -50,7 +50,7 @@ public class JvmLockImpl implements IJvmLock {
         } finally {
             lock.unlock();
         }
-        logger.info("key:"+key+"获取JVM成功");
+        logger.debug("key:"+key+"获取JVM成功");
         return true;
     }
 
@@ -58,7 +58,7 @@ public class JvmLockImpl implements IJvmLock {
     public void unlock(String key){
         try {
             map.remove(key);
-            logger.info(key+"JVM锁释放成功");
+            logger.debug(key+"JVM锁释放成功");
         }
         catch (Exception ex){
         	

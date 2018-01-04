@@ -32,7 +32,7 @@ public class DistributedLockImpl implements IDistributedLock {
 		if(!redislock.lock(key, exprie)){
 			return false;
 		}
-		logger.info("lock distributed lock success. key = " + key);
+		logger.debug("lock distributed lock success. key = " + key);
 		return true;
 	}
 
@@ -40,7 +40,7 @@ public class DistributedLockImpl implements IDistributedLock {
 	public void unlock(String key) {
 		jvmlock.unlock(key);
 		redislock.unlock(key);
-		logger.info("unlock distributed lock success. key = " + key);
+		logger.debug("unlock distributed lock success. key = " + key);
 	}
 
 	public IJvmLock getJvmlock() {

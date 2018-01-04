@@ -30,5 +30,7 @@ public interface IFileStoreService {
 	ObjectMetadata getFileInfo(String fileId);
 	
 	String getUrl(String fileId, Long expires);
+
+	void testConfig();
 	
 }
