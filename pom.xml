@@ -16,6 +16,8 @@
         <module>shop</module>
         <module>sms</module>
         <module>ons</module>
+        <module>task</module>
+        <module>api</module>
     </modules>
 
     <properties>
