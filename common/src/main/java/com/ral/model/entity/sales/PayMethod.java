@@ -1,24 +1,19 @@
-package com.ral.model.entity.member;
+package com.ral.model.entity.sales;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
-public class MemberType {
-    private Long id;
+public class PayMethod {
+    private Integer id;
 
     private String name;
 
-    private Long icon;
+    private Boolean isEnable;
 
-    private BigDecimal min;
+    private String appId;
 
-    private BigDecimal max;
+    private String mchId;
 
-    private Boolean isDiscount;
-
-    private BigDecimal discount;
-
-    private String desc;
+    private String key;
 
     private String createUser;
 
@@ -28,11 +23,11 @@ public class MemberType {
 
     private Date lastUpdateTime;
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -44,52 +39,36 @@ public class MemberType {
         this.name = name == null ? null : name.trim();
     }
 
-    public Long getIcon() {
-        return icon;
+    public Boolean getIsEnable() {
+        return isEnable;
     }
 
-    public void setIcon(Long icon) {
-        this.icon = icon;
+    public void setIsEnable(Boolean isEnable) {
+        this.isEnable = isEnable;
     }
 
-    public BigDecimal getMin() {
-        return min;
+    public String getAppId() {
+        return appId;
     }
 
-    public void setMin(BigDecimal min) {
-        this.min = min;
+    public void setAppId(String appId) {
+        this.appId = appId == null ? null : appId.trim();
     }
 
-    public BigDecimal getMax() {
-        return max;
+    public String getMchId() {
+        return mchId;
     }
 
-    public void setMax(BigDecimal max) {
-        this.max = max;
+    public void setMchId(String mchId) {
+        this.mchId = mchId == null ? null : mchId.trim();
     }
 
-    public Boolean getIsDiscount() {
-        return isDiscount;
+    public String getKey() {
+        return key;
     }
 
-    public void setIsDiscount(Boolean isDiscount) {
-        this.isDiscount = isDiscount;
-    }
-
-    public BigDecimal getDiscount() {
-        return discount;
-    }
-
-    public void setDiscount(BigDecimal discount) {
-        this.discount = discount;
-    }
-
-    public String getDesc() {
-        return desc;
-    }
-
-    public void setDesc(String desc) {
-        this.desc = desc == null ? null : desc.trim();
+    public void setKey(String key) {
+        this.key = key == null ? null : key.trim();
     }
 
     public String getCreateUser() {

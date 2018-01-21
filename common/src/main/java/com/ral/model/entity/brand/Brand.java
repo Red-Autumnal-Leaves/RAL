@@ -1,24 +1,15 @@
-package com.ral.model.entity.member;
+package com.ral.model.entity.brand;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
-public class MemberType {
+public class Brand {
     private Long id;
 
     private String name;
 
-    private Long icon;
+    private Long logo;
 
-    private BigDecimal min;
-
-    private BigDecimal max;
-
-    private Boolean isDiscount;
-
-    private BigDecimal discount;
-
-    private String desc;
+    private Long categoryId;
 
     private String createUser;
 
@@ -44,52 +35,20 @@ public class MemberType {
         this.name = name == null ? null : name.trim();
     }
 
-    public Long getIcon() {
-        return icon;
+    public Long getLogo() {
+        return logo;
     }
 
-    public void setIcon(Long icon) {
-        this.icon = icon;
+    public void setLogo(Long logo) {
+        this.logo = logo;
     }
 
-    public BigDecimal getMin() {
-        return min;
+    public Long getCategoryId() {
+        return categoryId;
     }
 
-    public void setMin(BigDecimal min) {
-        this.min = min;
-    }
-
-    public BigDecimal getMax() {
-        return max;
-    }
-
-    public void setMax(BigDecimal max) {
-        this.max = max;
-    }
-
-    public Boolean getIsDiscount() {
-        return isDiscount;
-    }
-
-    public void setIsDiscount(Boolean isDiscount) {
-        this.isDiscount = isDiscount;
-    }
-
-    public BigDecimal getDiscount() {
-        return discount;
-    }
-
-    public void setDiscount(BigDecimal discount) {
-        this.discount = discount;
-    }
-
-    public String getDesc() {
-        return desc;
-    }
-
-    public void setDesc(String desc) {
-        this.desc = desc == null ? null : desc.trim();
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
     }
 
     public String getCreateUser() {

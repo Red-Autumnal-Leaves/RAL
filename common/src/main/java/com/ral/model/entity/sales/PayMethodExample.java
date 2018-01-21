@@ -1,18 +1,17 @@
-package com.ral.model.entity.member;
+package com.ral.model.entity.sales;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class MemberTypeExample {
+public class PayMethodExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public MemberTypeExample() {
+    public PayMethodExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -116,52 +115,52 @@ public class MemberTypeExample {
             return (Criteria) this;
         }
 
-        public Criteria andIdEqualTo(Long value) {
+        public Criteria andIdEqualTo(Integer value) {
             addCriterion("id =", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIdNotEqualTo(Long value) {
+        public Criteria andIdNotEqualTo(Integer value) {
             addCriterion("id <>", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIdGreaterThan(Long value) {
+        public Criteria andIdGreaterThan(Integer value) {
             addCriterion("id >", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIdGreaterThanOrEqualTo(Long value) {
+        public Criteria andIdGreaterThanOrEqualTo(Integer value) {
             addCriterion("id >=", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIdLessThan(Long value) {
+        public Criteria andIdLessThan(Integer value) {
             addCriterion("id <", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIdLessThanOrEqualTo(Long value) {
+        public Criteria andIdLessThanOrEqualTo(Integer value) {
             addCriterion("id <=", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIdIn(List<Long> values) {
+        public Criteria andIdIn(List<Integer> values) {
             addCriterion("id in", values, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIdNotIn(List<Long> values) {
+        public Criteria andIdNotIn(List<Integer> values) {
             addCriterion("id not in", values, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIdBetween(Long value1, Long value2) {
+        public Criteria andIdBetween(Integer value1, Integer value2) {
             addCriterion("id between", value1, value2, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIdNotBetween(Long value1, Long value2) {
+        public Criteria andIdNotBetween(Integer value1, Integer value2) {
             addCriterion("id not between", value1, value2, "id");
             return (Criteria) this;
         }
@@ -236,373 +235,273 @@ public class MemberTypeExample {
             return (Criteria) this;
         }
 
-        public Criteria andIconIsNull() {
-            addCriterion("icon is null");
+        public Criteria andIsEnableIsNull() {
+            addCriterion("is_enable is null");
             return (Criteria) this;
         }
 
-        public Criteria andIconIsNotNull() {
-            addCriterion("icon is not null");
+        public Criteria andIsEnableIsNotNull() {
+            addCriterion("is_enable is not null");
             return (Criteria) this;
         }
 
-        public Criteria andIconEqualTo(Long value) {
-            addCriterion("icon =", value, "icon");
+        public Criteria andIsEnableEqualTo(Boolean value) {
+            addCriterion("is_enable =", value, "isEnable");
             return (Criteria) this;
         }
 
-        public Criteria andIconNotEqualTo(Long value) {
-            addCriterion("icon <>", value, "icon");
+        public Criteria andIsEnableNotEqualTo(Boolean value) {
+            addCriterion("is_enable <>", value, "isEnable");
             return (Criteria) this;
         }
 
-        public Criteria andIconGreaterThan(Long value) {
-            addCriterion("icon >", value, "icon");
+        public Criteria andIsEnableGreaterThan(Boolean value) {
+            addCriterion("is_enable >", value, "isEnable");
             return (Criteria) this;
         }
 
-        public Criteria andIconGreaterThanOrEqualTo(Long value) {
-            addCriterion("icon >=", value, "icon");
+        public Criteria andIsEnableGreaterThanOrEqualTo(Boolean value) {
+            addCriterion("is_enable >=", value, "isEnable");
             return (Criteria) this;
         }
 
-        public Criteria andIconLessThan(Long value) {
-            addCriterion("icon <", value, "icon");
+        public Criteria andIsEnableLessThan(Boolean value) {
+            addCriterion("is_enable <", value, "isEnable");
             return (Criteria) this;
         }
 
-        public Criteria andIconLessThanOrEqualTo(Long value) {
-            addCriterion("icon <=", value, "icon");
+        public Criteria andIsEnableLessThanOrEqualTo(Boolean value) {
+            addCriterion("is_enable <=", value, "isEnable");
             return (Criteria) this;
         }
 
-        public Criteria andIconIn(List<Long> values) {
-            addCriterion("icon in", values, "icon");
+        public Criteria andIsEnableIn(List<Boolean> values) {
+            addCriterion("is_enable in", values, "isEnable");
             return (Criteria) this;
         }
 
-        public Criteria andIconNotIn(List<Long> values) {
-            addCriterion("icon not in", values, "icon");
+        public Criteria andIsEnableNotIn(List<Boolean> values) {
+            addCriterion("is_enable not in", values, "isEnable");
             return (Criteria) this;
         }
 
-        public Criteria andIconBetween(Long value1, Long value2) {
-            addCriterion("icon between", value1, value2, "icon");
+        public Criteria andIsEnableBetween(Boolean value1, Boolean value2) {
+            addCriterion("is_enable between", value1, value2, "isEnable");
             return (Criteria) this;
         }
 
-        public Criteria andIconNotBetween(Long value1, Long value2) {
-            addCriterion("icon not between", value1, value2, "icon");
+        public Criteria andIsEnableNotBetween(Boolean value1, Boolean value2) {
+            addCriterion("is_enable not between", value1, value2, "isEnable");
             return (Criteria) this;
         }
 
-        public Criteria andMinIsNull() {
-            addCriterion("`min` is null");
+        public Criteria andAppIdIsNull() {
+            addCriterion("app_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andMinIsNotNull() {
-            addCriterion("`min` is not null");
+        public Criteria andAppIdIsNotNull() {
+            addCriterion("app_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andMinEqualTo(BigDecimal value) {
-            addCriterion("`min` =", value, "min");
+        public Criteria andAppIdEqualTo(String value) {
+            addCriterion("app_id =", value, "appId");
             return (Criteria) this;
         }
 
-        public Criteria andMinNotEqualTo(BigDecimal value) {
-            addCriterion("`min` <>", value, "min");
+        public Criteria andAppIdNotEqualTo(String value) {
+            addCriterion("app_id <>", value, "appId");
             return (Criteria) this;
         }
 
-        public Criteria andMinGreaterThan(BigDecimal value) {
-            addCriterion("`min` >", value, "min");
+        public Criteria andAppIdGreaterThan(String value) {
+            addCriterion("app_id >", value, "appId");
             return (Criteria) this;
         }
 
-        public Criteria andMinGreaterThanOrEqualTo(BigDecimal value) {
-            addCriterion("`min` >=", value, "min");
+        public Criteria andAppIdGreaterThanOrEqualTo(String value) {
+            addCriterion("app_id >=", value, "appId");
             return (Criteria) this;
         }
 
-        public Criteria andMinLessThan(BigDecimal value) {
-            addCriterion("`min` <", value, "min");
+        public Criteria andAppIdLessThan(String value) {
+            addCriterion("app_id <", value, "appId");
             return (Criteria) this;
         }
 
-        public Criteria andMinLessThanOrEqualTo(BigDecimal value) {
-            addCriterion("`min` <=", value, "min");
+        public Criteria andAppIdLessThanOrEqualTo(String value) {
+            addCriterion("app_id <=", value, "appId");
             return (Criteria) this;
         }
 
-        public Criteria andMinIn(List<BigDecimal> values) {
-            addCriterion("`min` in", values, "min");
+        public Criteria andAppIdLike(String value) {
+            addCriterion("app_id like", value, "appId");
             return (Criteria) this;
         }
 
-        public Criteria andMinNotIn(List<BigDecimal> values) {
-            addCriterion("`min` not in", values, "min");
+        public Criteria andAppIdNotLike(String value) {
+            addCriterion("app_id not like", value, "appId");
             return (Criteria) this;
         }
 
-        public Criteria andMinBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("`min` between", value1, value2, "min");
+        public Criteria andAppIdIn(List<String> values) {
+            addCriterion("app_id in", values, "appId");
             return (Criteria) this;
         }
 
-        public Criteria andMinNotBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("`min` not between", value1, value2, "min");
+        public Criteria andAppIdNotIn(List<String> values) {
+            addCriterion("app_id not in", values, "appId");
             return (Criteria) this;
         }
 
-        public Criteria andMaxIsNull() {
-            addCriterion("`max` is null");
+        public Criteria andAppIdBetween(String value1, String value2) {
+            addCriterion("app_id between", value1, value2, "appId");
             return (Criteria) this;
         }
 
-        public Criteria andMaxIsNotNull() {
-            addCriterion("`max` is not null");
+        public Criteria andAppIdNotBetween(String value1, String value2) {
+            addCriterion("app_id not between", value1, value2, "appId");
             return (Criteria) this;
         }
 
-        public Criteria andMaxEqualTo(BigDecimal value) {
-            addCriterion("`max` =", value, "max");
+        public Criteria andMchIdIsNull() {
+            addCriterion("mch_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andMaxNotEqualTo(BigDecimal value) {
-            addCriterion("`max` <>", value, "max");
+        public Criteria andMchIdIsNotNull() {
+            addCriterion("mch_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andMaxGreaterThan(BigDecimal value) {
-            addCriterion("`max` >", value, "max");
+        public Criteria andMchIdEqualTo(String value) {
+            addCriterion("mch_id =", value, "mchId");
             return (Criteria) this;
         }
 
-        public Criteria andMaxGreaterThanOrEqualTo(BigDecimal value) {
-            addCriterion("`max` >=", value, "max");
+        public Criteria andMchIdNotEqualTo(String value) {
+            addCriterion("mch_id <>", value, "mchId");
             return (Criteria) this;
         }
 
-        public Criteria andMaxLessThan(BigDecimal value) {
-            addCriterion("`max` <", value, "max");
+        public Criteria andMchIdGreaterThan(String value) {
+            addCriterion("mch_id >", value, "mchId");
             return (Criteria) this;
         }
 
-        public Criteria andMaxLessThanOrEqualTo(BigDecimal value) {
-            addCriterion("`max` <=", value, "max");
+        public Criteria andMchIdGreaterThanOrEqualTo(String value) {
+            addCriterion("mch_id >=", value, "mchId");
             return (Criteria) this;
         }
 
-        public Criteria andMaxIn(List<BigDecimal> values) {
-            addCriterion("`max` in", values, "max");
+        public Criteria andMchIdLessThan(String value) {
+            addCriterion("mch_id <", value, "mchId");
             return (Criteria) this;
         }
 
-        public Criteria andMaxNotIn(List<BigDecimal> values) {
-            addCriterion("`max` not in", values, "max");
+        public Criteria andMchIdLessThanOrEqualTo(String value) {
+            addCriterion("mch_id <=", value, "mchId");
             return (Criteria) this;
         }
 
-        public Criteria andMaxBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("`max` between", value1, value2, "max");
+        public Criteria andMchIdLike(String value) {
+            addCriterion("mch_id like", value, "mchId");
             return (Criteria) this;
         }
 
-        public Criteria andMaxNotBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("`max` not between", value1, value2, "max");
+        public Criteria andMchIdNotLike(String value) {
+            addCriterion("mch_id not like", value, "mchId");
             return (Criteria) this;
         }
 
-        public Criteria andIsDiscountIsNull() {
-            addCriterion("is_discount is null");
+        public Criteria andMchIdIn(List<String> values) {
+            addCriterion("mch_id in", values, "mchId");
             return (Criteria) this;
         }
 
-        public Criteria andIsDiscountIsNotNull() {
-            addCriterion("is_discount is not null");
+        public Criteria andMchIdNotIn(List<String> values) {
+            addCriterion("mch_id not in", values, "mchId");
             return (Criteria) this;
         }
 
-        public Criteria andIsDiscountEqualTo(Boolean value) {
-            addCriterion("is_discount =", value, "isDiscount");
+        public Criteria andMchIdBetween(String value1, String value2) {
+            addCriterion("mch_id between", value1, value2, "mchId");
             return (Criteria) this;
         }
 
-        public Criteria andIsDiscountNotEqualTo(Boolean value) {
-            addCriterion("is_discount <>", value, "isDiscount");
+        public Criteria andMchIdNotBetween(String value1, String value2) {
+            addCriterion("mch_id not between", value1, value2, "mchId");
             return (Criteria) this;
         }
 
-        public Criteria andIsDiscountGreaterThan(Boolean value) {
-            addCriterion("is_discount >", value, "isDiscount");
+        public Criteria andKeyIsNull() {
+            addCriterion("`key` is null");
             return (Criteria) this;
         }
 
-        public Criteria andIsDiscountGreaterThanOrEqualTo(Boolean value) {
-            addCriterion("is_discount >=", value, "isDiscount");
+        public Criteria andKeyIsNotNull() {
+            addCriterion("`key` is not null");
             return (Criteria) this;
         }
 
-        public Criteria andIsDiscountLessThan(Boolean value) {
-            addCriterion("is_discount <", value, "isDiscount");
+        public Criteria andKeyEqualTo(String value) {
+            addCriterion("`key` =", value, "key");
             return (Criteria) this;
         }
 
-        public Criteria andIsDiscountLessThanOrEqualTo(Boolean value) {
-            addCriterion("is_discount <=", value, "isDiscount");
+        public Criteria andKeyNotEqualTo(String value) {
+            addCriterion("`key` <>", value, "key");
             return (Criteria) this;
         }
 
-        public Criteria andIsDiscountIn(List<Boolean> values) {
-            addCriterion("is_discount in", values, "isDiscount");
+        public Criteria andKeyGreaterThan(String value) {
+            addCriterion("`key` >", value, "key");
             return (Criteria) this;
         }
 
-        public Criteria andIsDiscountNotIn(List<Boolean> values) {
-            addCriterion("is_discount not in", values, "isDiscount");
+        public Criteria andKeyGreaterThanOrEqualTo(String value) {
+            addCriterion("`key` >=", value, "key");
             return (Criteria) this;
         }
 
-        public Criteria andIsDiscountBetween(Boolean value1, Boolean value2) {
-            addCriterion("is_discount between", value1, value2, "isDiscount");
+        public Criteria andKeyLessThan(String value) {
+            addCriterion("`key` <", value, "key");
             return (Criteria) this;
         }
 
-        public Criteria andIsDiscountNotBetween(Boolean value1, Boolean value2) {
-            addCriterion("is_discount not between", value1, value2, "isDiscount");
+        public Criteria andKeyLessThanOrEqualTo(String value) {
+            addCriterion("`key` <=", value, "key");
             return (Criteria) this;
         }
 
-        public Criteria andDiscountIsNull() {
-            addCriterion("discount is null");
+        public Criteria andKeyLike(String value) {
+            addCriterion("`key` like", value, "key");
             return (Criteria) this;
         }
 
-        public Criteria andDiscountIsNotNull() {
-            addCriterion("discount is not null");
+        public Criteria andKeyNotLike(String value) {
+            addCriterion("`key` not like", value, "key");
             return (Criteria) this;
         }
 
-        public Criteria andDiscountEqualTo(BigDecimal value) {
-            addCriterion("discount =", value, "discount");
+        public Criteria andKeyIn(List<String> values) {
+            addCriterion("`key` in", values, "key");
             return (Criteria) this;
         }
 
-        public Criteria andDiscountNotEqualTo(BigDecimal value) {
-            addCriterion("discount <>", value, "discount");
+        public Criteria andKeyNotIn(List<String> values) {
+            addCriterion("`key` not in", values, "key");
             return (Criteria) this;
         }
 
-        public Criteria andDiscountGreaterThan(BigDecimal value) {
-            addCriterion("discount >", value, "discount");
+        public Criteria andKeyBetween(String value1, String value2) {
+            addCriterion("`key` between", value1, value2, "key");
             return (Criteria) this;
         }
 
-        public Criteria andDiscountGreaterThanOrEqualTo(BigDecimal value) {
-            addCriterion("discount >=", value, "discount");
-            return (Criteria) this;
-        }
-
-        public Criteria andDiscountLessThan(BigDecimal value) {
-            addCriterion("discount <", value, "discount");
-            return (Criteria) this;
-        }
-
-        public Criteria andDiscountLessThanOrEqualTo(BigDecimal value) {
-            addCriterion("discount <=", value, "discount");
-            return (Criteria) this;
-        }
-
-        public Criteria andDiscountIn(List<BigDecimal> values) {
-            addCriterion("discount in", values, "discount");
-            return (Criteria) this;
-        }
-
-        public Criteria andDiscountNotIn(List<BigDecimal> values) {
-            addCriterion("discount not in", values, "discount");
-            return (Criteria) this;
-        }
-
-        public Criteria andDiscountBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("discount between", value1, value2, "discount");
-            return (Criteria) this;
-        }
-
-        public Criteria andDiscountNotBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("discount not between", value1, value2, "discount");
-            return (Criteria) this;
-        }
-
-        public Criteria andDescIsNull() {
-            addCriterion("`desc` is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDescIsNotNull() {
-            addCriterion("`desc` is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDescEqualTo(String value) {
-            addCriterion("`desc` =", value, "desc");
-            return (Criteria) this;
-        }
-
-        public Criteria andDescNotEqualTo(String value) {
-            addCriterion("`desc` <>", value, "desc");
-            return (Criteria) this;
-        }
-
-        public Criteria andDescGreaterThan(String value) {
-            addCriterion("`desc` >", value, "desc");
-            return (Criteria) this;
-        }
-
-        public Criteria andDescGreaterThanOrEqualTo(String value) {
-            addCriterion("`desc` >=", value, "desc");
-            return (Criteria) this;
-        }
-
-        public Criteria andDescLessThan(String value) {
-            addCriterion("`desc` <", value, "desc");
-            return (Criteria) this;
-        }
-
-        public Criteria andDescLessThanOrEqualTo(String value) {
-            addCriterion("`desc` <=", value, "desc");
-            return (Criteria) this;
-        }
-
-        public Criteria andDescLike(String value) {
-            addCriterion("`desc` like", value, "desc");
-            return (Criteria) this;
-        }
-
-        public Criteria andDescNotLike(String value) {
-            addCriterion("`desc` not like", value, "desc");
-            return (Criteria) this;
-        }
-
-        public Criteria andDescIn(List<String> values) {
-            addCriterion("`desc` in", values, "desc");
-            return (Criteria) this;
-        }
-
-        public Criteria andDescNotIn(List<String> values) {
-            addCriterion("`desc` not in", values, "desc");
-            return (Criteria) this;
-        }
-
-        public Criteria andDescBetween(String value1, String value2) {
-            addCriterion("`desc` between", value1, value2, "desc");
-            return (Criteria) this;
-        }
-
-        public Criteria andDescNotBetween(String value1, String value2) {
-            addCriterion("`desc` not between", value1, value2, "desc");
+        public Criteria andKeyNotBetween(String value1, String value2) {
+            addCriterion("`key` not between", value1, value2, "key");
             return (Criteria) this;
         }
 

@@ -1,24 +1,19 @@
-package com.ral.model.entity.member;
+package com.ral.model.entity.catalog;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
-public class MemberType {
+public class Catalog {
     private Long id;
 
     private String name;
 
-    private Long icon;
+    private Long logo;
 
-    private BigDecimal min;
+    private Integer levl;
 
-    private BigDecimal max;
+    private Long parentId;
 
-    private Boolean isDiscount;
-
-    private BigDecimal discount;
-
-    private String desc;
+    private Boolean isEnable;
 
     private String createUser;
 
@@ -44,52 +39,36 @@ public class MemberType {
         this.name = name == null ? null : name.trim();
     }
 
-    public Long getIcon() {
-        return icon;
+    public Long getLogo() {
+        return logo;
     }
 
-    public void setIcon(Long icon) {
-        this.icon = icon;
+    public void setLogo(Long logo) {
+        this.logo = logo;
     }
 
-    public BigDecimal getMin() {
-        return min;
+    public Integer getLevl() {
+        return levl;
     }
 
-    public void setMin(BigDecimal min) {
-        this.min = min;
+    public void setLevl(Integer levl) {
+        this.levl = levl;
     }
 
-    public BigDecimal getMax() {
-        return max;
+    public Long getParentId() {
+        return parentId;
     }
 
-    public void setMax(BigDecimal max) {
-        this.max = max;
+    public void setParentId(Long parentId) {
+        this.parentId = parentId;
     }
 
-    public Boolean getIsDiscount() {
-        return isDiscount;
+    public Boolean getIsEnable() {
+        return isEnable;
     }
 
-    public void setIsDiscount(Boolean isDiscount) {
-        this.isDiscount = isDiscount;
-    }
-
-    public BigDecimal getDiscount() {
-        return discount;
-    }
-
-    public void setDiscount(BigDecimal discount) {
-        this.discount = discount;
-    }
-
-    public String getDesc() {
-        return desc;
-    }
-
-    public void setDesc(String desc) {
-        this.desc = desc == null ? null : desc.trim();
+    public void setIsEnable(Boolean isEnable) {
+        this.isEnable = isEnable;
     }
 
     public String getCreateUser() {

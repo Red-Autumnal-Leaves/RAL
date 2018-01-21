@@ -1,24 +1,15 @@
-package com.ral.model.entity.member;
+package com.ral.model.entity.category;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
-public class MemberType {
+public class Category {
     private Long id;
 
     private String name;
 
-    private Long icon;
+    private Long parentId;
 
-    private BigDecimal min;
-
-    private BigDecimal max;
-
-    private Boolean isDiscount;
-
-    private BigDecimal discount;
-
-    private String desc;
+    private Boolean isEnable;
 
     private String createUser;
 
@@ -44,52 +35,20 @@ public class MemberType {
         this.name = name == null ? null : name.trim();
     }
 
-    public Long getIcon() {
-        return icon;
+    public Long getParentId() {
+        return parentId;
     }
 
-    public void setIcon(Long icon) {
-        this.icon = icon;
+    public void setParentId(Long parentId) {
+        this.parentId = parentId;
     }
 
-    public BigDecimal getMin() {
-        return min;
+    public Boolean getIsEnable() {
+        return isEnable;
     }
 
-    public void setMin(BigDecimal min) {
-        this.min = min;
-    }
-
-    public BigDecimal getMax() {
-        return max;
-    }
-
-    public void setMax(BigDecimal max) {
-        this.max = max;
-    }
-
-    public Boolean getIsDiscount() {
-        return isDiscount;
-    }
-
-    public void setIsDiscount(Boolean isDiscount) {
-        this.isDiscount = isDiscount;
-    }
-
-    public BigDecimal getDiscount() {
-        return discount;
-    }
-
-    public void setDiscount(BigDecimal discount) {
-        this.discount = discount;
-    }
-
-    public String getDesc() {
-        return desc;
-    }
-
-    public void setDesc(String desc) {
-        this.desc = desc == null ? null : desc.trim();
+    public void setIsEnable(Boolean isEnable) {
+        this.isEnable = isEnable;
     }
 
     public String getCreateUser() {
