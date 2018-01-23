@@ -18,6 +18,7 @@
         <module>ons</module>
         <module>task</module>
         <module>api</module>
+        <module>auth</module>
     </modules>
 
     <properties>
