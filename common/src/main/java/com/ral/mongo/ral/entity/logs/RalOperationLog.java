@@ -1,7 +1,9 @@
-package com.ral.mongo.entity.logs;
+package com.ral.mongo.ral.entity.logs;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -9,10 +11,13 @@ import java.util.Date;
  * @desc
  * @date 2018/1/23 21:30
  */
-public class RalOperationLog {
+@Document(collection = RalOperationLog.COLLECTION_NAME)
+public class RalOperationLog implements Serializable {
+
+    static final String COLLECTION_NAME = "ral_operation_log";
 
     @Id
-    private Long id;//主键
+    private String id;//主键
 
     private String source;//系统code，如auth ,sms
 
@@ -28,11 +33,11 @@ public class RalOperationLog {
 
     private Date createTime;//创建时间
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

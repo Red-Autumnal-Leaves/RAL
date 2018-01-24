@@ -52,6 +52,20 @@ public class QueueConfiguration {
 	}
 
 
+
+	//operation 队列
+	@Bean
+	public Queue operationLogQueue() {
+		return new Queue(MessageQueueEnum.RAL_OPERATION_LOG_QUEUE.getName(),true,false,false);
+	}
+
+	@Bean
+	public Binding  operationLogQueueBinding() {
+		return BindingBuilder.bind(exampleQueue()).to(defaultExchange()).with(MessageQueueEnum.RAL_OPERATION_LOG_QUEUE.getName());
+	}
+
+
+
 	//example 队列
 	@Bean
 	public Queue exampleQueue() {

@@ -1,6 +1,8 @@
 package com.ral.sms.web.controller;
 
 import com.ral.model.res.Result;
+import com.ral.service.mongo.IRalOperationLogService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,11 +14,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class HomeController {
 
+    @Autowired
+    private IRalOperationLogService ralOperationLogService;
 
     @RequestMapping("/")
     public Result home(){
-
-        return Result.initSuccessResult(null,null);
+        return Result.initSuccessResult(ralOperationLogService.findAll(),null);
     }
+
+
 
 }

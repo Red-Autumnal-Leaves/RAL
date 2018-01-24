@@ -14,7 +14,9 @@ public enum RalOperationTypeEnum implements IndexedEnum<RalOperationTypeEnum> {
     AUTH_USER_LOGIN(1,"AUTH用户登录日志",RalOperationSourceEnum.RAL_AUTH);
 
     RalOperationTypeEnum(int index,String name,RalOperationSourceEnum source){
-
+        this.index  = index;
+        this.name = name;
+        this.source = source;
     }
 
     private int index;

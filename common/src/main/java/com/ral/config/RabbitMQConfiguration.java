@@ -8,6 +8,7 @@ import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.Scope;
 
 /**
@@ -16,6 +17,7 @@ import org.springframework.context.annotation.Scope;
  * @desc 消息队列相关配置
  */
 @Configuration
+@PropertySource("classpath:rabbitmq.properties")
 @ConfigurationProperties(prefix = "spring.rabbitmq")
 public class RabbitMQConfiguration {
 

@@ -21,6 +21,12 @@ public final class MQConstant {
 	//DLX repeat QUEUE 死信转发队列
 	public static final String DEFAULT_REPEAT_TRADE_QUEUE_NAME = "ral.shop.repeat.trade.queue";
 
+
+	//operation log  队列
+	public static final String RAL_OPERATION_LOG_QUEUE_NAME = "ral.operation.log.queue";
+
+
+
 	//example 队列
 	public static final String EXAMPLE_QUEUE_NAME = "ral.shop.example.queue";
 

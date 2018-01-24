@@ -11,7 +11,8 @@ import com.ral.model.enums.IndexedEnumUtil;
 public enum MessageQueueEnum implements IndexedEnum<MessageQueueEnum>{
     DEFAULT_DLX_QUEUE(1, MQConstant.DEFAULT_EXCHANGE,MQConstant.DEFAULT_DEAD_LETTER_QUEUE_NAME,"DLX死信队列"),
     DEFAULT_REPEAT_TRADE_QUEUE(2,MQConstant.DEFAULT_EXCHANGE,MQConstant.DEFAULT_REPEAT_TRADE_QUEUE_NAME,"DLX死信转发队列"),
-    EXAMPLE_QUEUE(3,MQConstant.DEFAULT_EXCHANGE,MQConstant.EXAMPLE_QUEUE_NAME,"EXAMPLE测试队列")
+    EXAMPLE_QUEUE(3,MQConstant.DEFAULT_EXCHANGE,MQConstant.EXAMPLE_QUEUE_NAME,"EXAMPLE测试队列"),
+    RAL_OPERATION_LOG_QUEUE(4,MQConstant.DEFAULT_EXCHANGE,MQConstant.RAL_OPERATION_LOG_QUEUE_NAME,"RAL操作日志队列")
     ;
 
     MessageQueueEnum(int index,String exchange,String name,String desc){
