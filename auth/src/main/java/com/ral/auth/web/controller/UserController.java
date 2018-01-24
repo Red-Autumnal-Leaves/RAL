@@ -27,7 +27,7 @@ public class UserController {
 	 */
 	@RequestMapping(value = "/{tenantId}/login",method = RequestMethod.POST,produces="application/json")
 	public Result login(HttpServletRequest request, @PathVariable("tenantId")String tenantId, @RequestBody String body){
-		return userBusiness.login(tenantId, body);
+		return userBusiness.login(request,tenantId, body);
 	}
 
 }

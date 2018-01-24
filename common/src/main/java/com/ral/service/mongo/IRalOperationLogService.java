@@ -10,7 +10,7 @@ import java.util.List;
  */
 public interface IRalOperationLogService {
 
-    void save(RalOperationTypeEnum type, String content, String data, RalOperationResultEnum result);
+    void logger(RalOperationTypeEnum type, String relationId, String content, RalOperationResultEnum result);
 
     List<RalOperationLog> findAll();
 }

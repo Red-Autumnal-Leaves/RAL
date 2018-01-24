@@ -17,12 +17,6 @@
             <groupId>com.ral</groupId>
             <artifactId>common</artifactId>
             <version>${ral.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-data-mongodb</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
 
         <!-- web -->

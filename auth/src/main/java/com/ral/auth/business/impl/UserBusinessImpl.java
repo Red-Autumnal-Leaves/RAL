@@ -16,6 +16,8 @@ import com.ral.util.date.DateUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 
@@ -40,8 +42,11 @@ public class UserBusinessImpl implements IUserBusiness {
 	@Autowired
 	private IActionService actionService;
 
+	@Autowired
+	private IAuthUserLoginLogService authUserLoginLogService;
+
 	@Override
-	public Result login(String tenantId, String body) {
+	public Result login(HttpServletRequest request,String tenantId, String body) {
 		if(StringUtils.isNullOrEmpty(tenantId)){
 			throw new ParamsException("租户ID不能为空！");
 		}
@@ -76,6 +81,10 @@ public class UserBusinessImpl implements IUserBusiness {
 			return new Result(HttpStatusEnum.OK, "登录失败,用户身份异常！", false);
 		}
 		UserVo data  = intLoginUser(tenant,user, role);
+
+        authUserLoginLogService.logger(request,tenantId,userName);
+
+
 		return Result.initSuccessResult(data, null);
 	}
 	

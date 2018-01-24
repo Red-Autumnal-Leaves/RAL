@@ -27,7 +27,7 @@ public class RalOperationLog implements Serializable {
 
     private String content;//记录内容
 
-    private String data;//存储的业务数据
+    private String relationId;//存储的业务数据
 
     private Integer result;//操作结果  用于区分错误日志还是正常日志
 
@@ -65,12 +65,12 @@ public class RalOperationLog implements Serializable {
         this.content = content;
     }
 
-    public String getData() {
-        return data;
+    public String getRelationId() {
+        return relationId;
     }
 
-    public void setData(String data) {
-        this.data = data;
+    public void setRelationId(String relationId) {
+        this.relationId = relationId;
     }
 
     public Integer getResult() {

@@ -27,12 +27,12 @@ public class RalOperationLogServiceImpl implements IRalOperationLogService {
     private IMessageQueueService messageQueueService;
 
     @Override
-    public void save(RalOperationTypeEnum type, String content, String data, RalOperationResultEnum result) {
+    public void logger(RalOperationTypeEnum type, String relationId, String content, RalOperationResultEnum result) {
         RalOperationLog log = new RalOperationLog();
         log.setSource(type.getSource().getCode());
         log.setType(type.getIndex());
         log.setContent(content);
-        log.setData(data);
+        log.setRelationId(relationId);
         log.setName(type.getName());
         log.setResult(result.getIndex());
         log.setCreateTime(new Date());
