@@ -19,9 +19,14 @@ public class HomeController {
 
     @RequestMapping("/")
     public Result home(){
-        return Result.initSuccessResult(ralOperationLogService.findAll(),null);
+        return Result.initSuccessResult(null,null);
     }
 
+
+    @RequestMapping("/log")
+    public Result log(){
+        return Result.initSuccessResult(ralOperationLogService.findAll(),null);
+    }
 
 
 }
