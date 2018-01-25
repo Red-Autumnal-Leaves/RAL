@@ -47,7 +47,7 @@
                 <configuration>
                     <mainClass>com.ral.auth.AuthApplication</mainClass>
                 </configuration>
-                <executions>
+               <executions>
                     <execution>
                         <goals>
                             <goal>repackage</goal>
