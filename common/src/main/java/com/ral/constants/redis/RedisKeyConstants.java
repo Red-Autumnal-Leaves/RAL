@@ -21,4 +21,15 @@ public class RedisKeyConstants {
      * Redis id 生成策略 默认Map key
      */
     public final static String ID_GENERATER_KEY = "ID_GENERATER_KEY_";
+
+
+    /**
+     * catalog 目录hash 缓存key
+     */
+    public final static String CATALOG_MAP = "CATALOG_MAP";
+
+    /**
+     * catalog  树缓存
+     */
+    public final static String CATALOG_TREE_KEY = "CATALOG_TREE_KEY";
 }

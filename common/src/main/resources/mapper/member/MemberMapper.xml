@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ral.dao.member.MemberMapper" >
+  <resultMap id="BaseResultMap" type="com.ral.model.entity.member.Member" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="INTEGER" />
+    <result column="birth" property="birth" jdbcType="DATE" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="header" property="header" jdbcType="BIGINT" />
+    <result column="integral" property="integral" jdbcType="INTEGER" />
+    <result column="member_type" property="memberType" jdbcType="BIGINT" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="last_update_time" property="lastUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="is_disable" property="isDisable" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, username, `password`, sex, birth, phone, email, `header`, integral, member_type, 
+    `status`, create_time, last_update_time, is_disable
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ral.model.entity.member.MemberExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from member
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from member
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from member
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ral.model.entity.member.MemberExample" >
+    delete from member
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ral.model.entity.member.Member" >
+    insert into member (id, username, `password`, 
+      sex, birth, phone, email, 
+      `header`, integral, member_type, 
+      `status`, create_time, last_update_time, 
+      is_disable)
+    values (#{id,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=INTEGER}, #{birth,jdbcType=DATE}, #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{header,jdbcType=BIGINT}, #{integral,jdbcType=INTEGER}, #{memberType,jdbcType=BIGINT}, 
+      #{status,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{lastUpdateTime,jdbcType=TIMESTAMP}, 
+      #{isDisable,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ral.model.entity.member.Member" >
+    insert into member
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="password != null" >
+        `password`,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="birth != null" >
+        birth,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="header != null" >
+        `header`,
+      </if>
+      <if test="integral != null" >
+        integral,
+      </if>
+      <if test="memberType != null" >
+        member_type,
+      </if>
+      <if test="status != null" >
+        `status`,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="lastUpdateTime != null" >
+        last_update_time,
+      </if>
+      <if test="isDisable != null" >
+        is_disable,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="birth != null" >
+        #{birth,jdbcType=DATE},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="header != null" >
+        #{header,jdbcType=BIGINT},
+      </if>
+      <if test="integral != null" >
+        #{integral,jdbcType=INTEGER},
+      </if>
+      <if test="memberType != null" >
+        #{memberType,jdbcType=BIGINT},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdateTime != null" >
+        #{lastUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDisable != null" >
+        #{isDisable,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ral.model.entity.member.MemberExample" resultType="java.lang.Integer" >
+    select count(*) from member
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update member
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.username != null" >
+        username = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null" >
+        `password` = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sex != null" >
+        sex = #{record.sex,jdbcType=INTEGER},
+      </if>
+      <if test="record.birth != null" >
+        birth = #{record.birth,jdbcType=DATE},
+      </if>
+      <if test="record.phone != null" >
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null" >
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.header != null" >
+        `header` = #{record.header,jdbcType=BIGINT},
+      </if>
+      <if test="record.integral != null" >
+        integral = #{record.integral,jdbcType=INTEGER},
+      </if>
+      <if test="record.memberType != null" >
+        member_type = #{record.memberType,jdbcType=BIGINT},
+      </if>
+      <if test="record.status != null" >
+        `status` = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastUpdateTime != null" >
+        last_update_time = #{record.lastUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isDisable != null" >
+        is_disable = #{record.isDisable,jdbcType=BIT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update member
+    set id = #{record.id,jdbcType=BIGINT},
+      username = #{record.username,jdbcType=VARCHAR},
+      `password` = #{record.password,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=INTEGER},
+      birth = #{record.birth,jdbcType=DATE},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      `header` = #{record.header,jdbcType=BIGINT},
+      integral = #{record.integral,jdbcType=INTEGER},
+      member_type = #{record.memberType,jdbcType=BIGINT},
+      `status` = #{record.status,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      last_update_time = #{record.lastUpdateTime,jdbcType=TIMESTAMP},
+      is_disable = #{record.isDisable,jdbcType=BIT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ral.model.entity.member.Member" >
+    update member
+    <set >
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        `password` = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="birth != null" >
+        birth = #{birth,jdbcType=DATE},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="header != null" >
+        `header` = #{header,jdbcType=BIGINT},
+      </if>
+      <if test="integral != null" >
+        integral = #{integral,jdbcType=INTEGER},
+      </if>
+      <if test="memberType != null" >
+        member_type = #{memberType,jdbcType=BIGINT},
+      </if>
+      <if test="status != null" >
+        `status` = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdateTime != null" >
+        last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDisable != null" >
+        is_disable = #{isDisable,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ral.model.entity.member.Member" >
+    update member
+    set username = #{username,jdbcType=VARCHAR},
+      `password` = #{password,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      birth = #{birth,jdbcType=DATE},
+      phone = #{phone,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      `header` = #{header,jdbcType=BIGINT},
+      integral = #{integral,jdbcType=INTEGER},
+      member_type = #{memberType,jdbcType=BIGINT},
+      `status` = #{status,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP},
+      is_disable = #{isDisable,jdbcType=BIT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

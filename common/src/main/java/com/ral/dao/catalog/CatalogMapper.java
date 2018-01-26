@@ -1,5 +1,6 @@
 package com.ral.dao.catalog;
 
+import com.ral.model.dto.catalog.CatalogDto;
 import com.ral.model.entity.catalog.Catalog;
 import com.ral.model.entity.catalog.CatalogExample;
 import org.apache.ibatis.annotations.Param;
@@ -31,4 +32,6 @@ public interface CatalogMapper {
     int updateByPrimaryKeySelective(Catalog record);
 
     int updateByPrimaryKey(Catalog record);
+
+
 }

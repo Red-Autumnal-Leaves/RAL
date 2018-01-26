@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ral.dao.item.EvaluateMapper" >
+  <resultMap id="BaseResultMap" type="com.ral.model.entity.item.Evaluate" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="item_code" property="itemCode" jdbcType="VARCHAR" />
+    <result column="price_star" property="priceStar" jdbcType="INTEGER" />
+    <result column="quality_star" property="qualityStar" jdbcType="INTEGER" />
+    <result column="match_star" property="matchStar" jdbcType="INTEGER" />
+    <result column="logistics_star" property="logisticsStar" jdbcType="INTEGER" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="is_anonymous" property="isAnonymous" jdbcType="BIT" />
+    <result column="is_sslide" property="isSslide" jdbcType="BIT" />
+    <result column="member_id" property="memberId" jdbcType="BIGINT" />
+    <result column="create_user" property="createUser" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="last_update_user" property="lastUpdateUser" jdbcType="VARCHAR" />
+    <result column="last_update_time" property="lastUpdateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, item_code, price_star, quality_star, match_star, logistics_star, content, is_anonymous, 
+    is_sslide, member_id, create_user, create_time, last_update_user, last_update_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ral.model.entity.item.EvaluateExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from evaluate
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from evaluate
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from evaluate
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ral.model.entity.item.EvaluateExample" >
+    delete from evaluate
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ral.model.entity.item.Evaluate" >
+    insert into evaluate (id, item_code, price_star, 
+      quality_star, match_star, logistics_star, 
+      content, is_anonymous, is_sslide, 
+      member_id, create_user, create_time, 
+      last_update_user, last_update_time)
+    values (#{id,jdbcType=BIGINT}, #{itemCode,jdbcType=VARCHAR}, #{priceStar,jdbcType=INTEGER}, 
+      #{qualityStar,jdbcType=INTEGER}, #{matchStar,jdbcType=INTEGER}, #{logisticsStar,jdbcType=INTEGER}, 
+      #{content,jdbcType=VARCHAR}, #{isAnonymous,jdbcType=BIT}, #{isSslide,jdbcType=BIT}, 
+      #{memberId,jdbcType=BIGINT}, #{createUser,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{lastUpdateUser,jdbcType=VARCHAR}, #{lastUpdateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ral.model.entity.item.Evaluate" >
+    insert into evaluate
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="itemCode != null" >
+        item_code,
+      </if>
+      <if test="priceStar != null" >
+        price_star,
+      </if>
+      <if test="qualityStar != null" >
+        quality_star,
+      </if>
+      <if test="matchStar != null" >
+        match_star,
+      </if>
+      <if test="logisticsStar != null" >
+        logistics_star,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="isAnonymous != null" >
+        is_anonymous,
+      </if>
+      <if test="isSslide != null" >
+        is_sslide,
+      </if>
+      <if test="memberId != null" >
+        member_id,
+      </if>
+      <if test="createUser != null" >
+        create_user,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="lastUpdateUser != null" >
+        last_update_user,
+      </if>
+      <if test="lastUpdateTime != null" >
+        last_update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="itemCode != null" >
+        #{itemCode,jdbcType=VARCHAR},
+      </if>
+      <if test="priceStar != null" >
+        #{priceStar,jdbcType=INTEGER},
+      </if>
+      <if test="qualityStar != null" >
+        #{qualityStar,jdbcType=INTEGER},
+      </if>
+      <if test="matchStar != null" >
+        #{matchStar,jdbcType=INTEGER},
+      </if>
+      <if test="logisticsStar != null" >
+        #{logisticsStar,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="isAnonymous != null" >
+        #{isAnonymous,jdbcType=BIT},
+      </if>
+      <if test="isSslide != null" >
+        #{isSslide,jdbcType=BIT},
+      </if>
+      <if test="memberId != null" >
+        #{memberId,jdbcType=BIGINT},
+      </if>
+      <if test="createUser != null" >
+        #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdateUser != null" >
+        #{lastUpdateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdateTime != null" >
+        #{lastUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ral.model.entity.item.EvaluateExample" resultType="java.lang.Integer" >
+    select count(*) from evaluate
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update evaluate
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.itemCode != null" >
+        item_code = #{record.itemCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.priceStar != null" >
+        price_star = #{record.priceStar,jdbcType=INTEGER},
+      </if>
+      <if test="record.qualityStar != null" >
+        quality_star = #{record.qualityStar,jdbcType=INTEGER},
+      </if>
+      <if test="record.matchStar != null" >
+        match_star = #{record.matchStar,jdbcType=INTEGER},
+      </if>
+      <if test="record.logisticsStar != null" >
+        logistics_star = #{record.logisticsStar,jdbcType=INTEGER},
+      </if>
+      <if test="record.content != null" >
+        content = #{record.content,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isAnonymous != null" >
+        is_anonymous = #{record.isAnonymous,jdbcType=BIT},
+      </if>
+      <if test="record.isSslide != null" >
+        is_sslide = #{record.isSslide,jdbcType=BIT},
+      </if>
+      <if test="record.memberId != null" >
+        member_id = #{record.memberId,jdbcType=BIGINT},
+      </if>
+      <if test="record.createUser != null" >
+        create_user = #{record.createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastUpdateUser != null" >
+        last_update_user = #{record.lastUpdateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastUpdateTime != null" >
+        last_update_time = #{record.lastUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update evaluate
+    set id = #{record.id,jdbcType=BIGINT},
+      item_code = #{record.itemCode,jdbcType=VARCHAR},
+      price_star = #{record.priceStar,jdbcType=INTEGER},
+      quality_star = #{record.qualityStar,jdbcType=INTEGER},
+      match_star = #{record.matchStar,jdbcType=INTEGER},
+      logistics_star = #{record.logisticsStar,jdbcType=INTEGER},
+      content = #{record.content,jdbcType=VARCHAR},
+      is_anonymous = #{record.isAnonymous,jdbcType=BIT},
+      is_sslide = #{record.isSslide,jdbcType=BIT},
+      member_id = #{record.memberId,jdbcType=BIGINT},
+      create_user = #{record.createUser,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      last_update_user = #{record.lastUpdateUser,jdbcType=VARCHAR},
+      last_update_time = #{record.lastUpdateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ral.model.entity.item.Evaluate" >
+    update evaluate
+    <set >
+      <if test="itemCode != null" >
+        item_code = #{itemCode,jdbcType=VARCHAR},
+      </if>
+      <if test="priceStar != null" >
+        price_star = #{priceStar,jdbcType=INTEGER},
+      </if>
+      <if test="qualityStar != null" >
+        quality_star = #{qualityStar,jdbcType=INTEGER},
+      </if>
+      <if test="matchStar != null" >
+        match_star = #{matchStar,jdbcType=INTEGER},
+      </if>
+      <if test="logisticsStar != null" >
+        logistics_star = #{logisticsStar,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="isAnonymous != null" >
+        is_anonymous = #{isAnonymous,jdbcType=BIT},
+      </if>
+      <if test="isSslide != null" >
+        is_sslide = #{isSslide,jdbcType=BIT},
+      </if>
+      <if test="memberId != null" >
+        member_id = #{memberId,jdbcType=BIGINT},
+      </if>
+      <if test="createUser != null" >
+        create_user = #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdateUser != null" >
+        last_update_user = #{lastUpdateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdateTime != null" >
+        last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ral.model.entity.item.Evaluate" >
+    update evaluate
+    set item_code = #{itemCode,jdbcType=VARCHAR},
+      price_star = #{priceStar,jdbcType=INTEGER},
+      quality_star = #{qualityStar,jdbcType=INTEGER},
+      match_star = #{matchStar,jdbcType=INTEGER},
+      logistics_star = #{logisticsStar,jdbcType=INTEGER},
+      content = #{content,jdbcType=VARCHAR},
+      is_anonymous = #{isAnonymous,jdbcType=BIT},
+      is_sslide = #{isSslide,jdbcType=BIT},
+      member_id = #{memberId,jdbcType=BIGINT},
+      create_user = #{createUser,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      last_update_user = #{lastUpdateUser,jdbcType=VARCHAR},
+      last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

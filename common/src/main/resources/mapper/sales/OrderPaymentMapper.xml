@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ral.dao.sales.OrderPaymentMapper" >
+  <resultMap id="BaseResultMap" type="com.ral.model.entity.sales.OrderPayment" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="sales_order_no" property="salesOrderNo" jdbcType="VARCHAR" />
+    <result column="pay_method_id" property="payMethodId" jdbcType="BIGINT" />
+    <result column="amount" property="amount" jdbcType="DECIMAL" />
+    <result column="serial_no" property="serialNo" jdbcType="VARCHAR" />
+    <result column="pay_no" property="payNo" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="last_update_time" property="lastUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="is_disable" property="isDisable" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, sales_order_no, pay_method_id, amount, serial_no, pay_no, create_time, last_update_time, 
+    is_disable
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ral.model.entity.sales.OrderPaymentExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from order_payment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from order_payment
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from order_payment
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ral.model.entity.sales.OrderPaymentExample" >
+    delete from order_payment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ral.model.entity.sales.OrderPayment" >
+    insert into order_payment (id, sales_order_no, pay_method_id, 
+      amount, serial_no, pay_no, 
+      create_time, last_update_time, is_disable
+      )
+    values (#{id,jdbcType=BIGINT}, #{salesOrderNo,jdbcType=VARCHAR}, #{payMethodId,jdbcType=BIGINT}, 
+      #{amount,jdbcType=DECIMAL}, #{serialNo,jdbcType=VARCHAR}, #{payNo,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{lastUpdateTime,jdbcType=TIMESTAMP}, #{isDisable,jdbcType=BIT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ral.model.entity.sales.OrderPayment" >
+    insert into order_payment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="salesOrderNo != null" >
+        sales_order_no,
+      </if>
+      <if test="payMethodId != null" >
+        pay_method_id,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="serialNo != null" >
+        serial_no,
+      </if>
+      <if test="payNo != null" >
+        pay_no,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="lastUpdateTime != null" >
+        last_update_time,
+      </if>
+      <if test="isDisable != null" >
+        is_disable,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="salesOrderNo != null" >
+        #{salesOrderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="payMethodId != null" >
+        #{payMethodId,jdbcType=BIGINT},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="serialNo != null" >
+        #{serialNo,jdbcType=VARCHAR},
+      </if>
+      <if test="payNo != null" >
+        #{payNo,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdateTime != null" >
+        #{lastUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDisable != null" >
+        #{isDisable,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ral.model.entity.sales.OrderPaymentExample" resultType="java.lang.Integer" >
+    select count(*) from order_payment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update order_payment
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.salesOrderNo != null" >
+        sales_order_no = #{record.salesOrderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payMethodId != null" >
+        pay_method_id = #{record.payMethodId,jdbcType=BIGINT},
+      </if>
+      <if test="record.amount != null" >
+        amount = #{record.amount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.serialNo != null" >
+        serial_no = #{record.serialNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payNo != null" >
+        pay_no = #{record.payNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastUpdateTime != null" >
+        last_update_time = #{record.lastUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isDisable != null" >
+        is_disable = #{record.isDisable,jdbcType=BIT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update order_payment
+    set id = #{record.id,jdbcType=BIGINT},
+      sales_order_no = #{record.salesOrderNo,jdbcType=VARCHAR},
+      pay_method_id = #{record.payMethodId,jdbcType=BIGINT},
+      amount = #{record.amount,jdbcType=DECIMAL},
+      serial_no = #{record.serialNo,jdbcType=VARCHAR},
+      pay_no = #{record.payNo,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      last_update_time = #{record.lastUpdateTime,jdbcType=TIMESTAMP},
+      is_disable = #{record.isDisable,jdbcType=BIT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ral.model.entity.sales.OrderPayment" >
+    update order_payment
+    <set >
+      <if test="salesOrderNo != null" >
+        sales_order_no = #{salesOrderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="payMethodId != null" >
+        pay_method_id = #{payMethodId,jdbcType=BIGINT},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="serialNo != null" >
+        serial_no = #{serialNo,jdbcType=VARCHAR},
+      </if>
+      <if test="payNo != null" >
+        pay_no = #{payNo,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdateTime != null" >
+        last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDisable != null" >
+        is_disable = #{isDisable,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ral.model.entity.sales.OrderPayment" >
+    update order_payment
+    set sales_order_no = #{salesOrderNo,jdbcType=VARCHAR},
+      pay_method_id = #{payMethodId,jdbcType=BIGINT},
+      amount = #{amount,jdbcType=DECIMAL},
+      serial_no = #{serialNo,jdbcType=VARCHAR},
+      pay_no = #{payNo,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP},
+      is_disable = #{isDisable,jdbcType=BIT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
