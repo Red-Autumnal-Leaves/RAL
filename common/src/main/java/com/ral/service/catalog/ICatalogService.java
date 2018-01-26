@@ -12,17 +12,15 @@ public interface ICatalogService {
 
     List<Catalog> selectByExample(CatalogExample example);
 
-    List<CatalogDto> getAllTree(CatalogExample example);
+    List<CatalogDto> getAllTree();
+
+    List<CatalogDto> getAllDto();
 
     CatalogDto detail(Long catalogId);
 
     int delete(Long catalogId);
 
     int update(Catalog catalog);
-
-    List<CatalogDto> convertToDto(List<Catalog> catalogs);
-
-    CatalogDto convertToDto(Catalog catalog);
 
 
 }

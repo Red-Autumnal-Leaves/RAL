@@ -2,6 +2,7 @@ package com.ral.dao.category;
 
 import java.util.List;
 
+import com.ral.model.dto.category.CategoryDto;
 import com.ral.model.entity.category.Category;
 import com.ral.model.entity.category.CategoryExample;
 import org.apache.ibatis.annotations.Param;
@@ -31,4 +32,9 @@ public interface CategoryMapper {
     int updateByPrimaryKeySelective(Category record);
 
     int updateByPrimaryKey(Category record);
+
+    List<CategoryDto> queryAllDtos();
+
+    CategoryDto getDtoByCategoryId(@Param("categoryId")Long categoryId);
+
 }

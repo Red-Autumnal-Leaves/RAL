@@ -25,8 +25,6 @@ public class Catalog {
     private Date lastUpdateTime;
 
 
-
-
     public Long getId() {
         return id;
     }

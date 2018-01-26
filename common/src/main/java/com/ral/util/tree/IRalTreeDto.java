@@ -1,11 +1,12 @@
-package com.ral.model.dto;
+package com.ral.util.tree;
 
+import java.io.Serializable;
 import java.util.List;
 /**
  * 通用树形接口
  * Created by victor on 2018/1/26.
  */
-public interface IRalTreeDto<T extends IRalTreeDto> {
+public interface IRalTreeDto<T extends IRalTreeDto>  extends Serializable{
 
     /**
      * 获取当前节点的KEY

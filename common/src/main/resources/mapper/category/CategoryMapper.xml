@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ral.dao.category.CategoryMapper" >
+
+  <cache eviction="FIFO" type="com.ral.config.MybatisRedisCache" flushInterval="60000" size="512" readOnly="true"  />
+
   <resultMap id="BaseResultMap" type="com.ral.model.entity.category.Category" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="name" property="name" jdbcType="VARCHAR" />
@@ -10,6 +13,9 @@
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="last_update_user" property="lastUpdateUser" jdbcType="VARCHAR" />
     <result column="last_update_time" property="lastUpdateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+
+  <resultMap id="DtoResultMap" type="com.ral.model.dto.category.CategoryDto" extends="BaseResultMap">
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -256,4 +262,13 @@
       last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+  <select id="queryAllDtos" resultMap="DtoResultMap">
+    select id,`name`,parent_id,is_enable from category;
+  </select>
+
+  <select id="getDtoByCategoryId" resultMap="DtoResultMap">
+    select id,`name`,parent_id,is_enable from category where id = #{categoryId};
+  </select>
+
 </mapper>

@@ -24,12 +24,13 @@ public class RedisKeyConstants {
 
 
     /**
-     * catalog 目录hash 缓存key
-     */
-    public final static String CATALOG_MAP = "CATALOG_MAP";
-
-    /**
      * catalog  树缓存
      */
     public final static String CATALOG_TREE_KEY = "CATALOG_TREE_KEY";
+
+    /**
+     * category 树缓存
+     */
+    public final static String CATEGORY_TREE_KEY = "CATEGORY_TREE_KEY";
+
 }

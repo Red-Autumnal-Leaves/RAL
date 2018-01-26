@@ -33,5 +33,8 @@ public interface CatalogMapper {
 
     int updateByPrimaryKey(Catalog record);
 
+    List<CatalogDto> queryAllDto();
+
+    CatalogDto queryDtoById(@Param("catalogId")Long catalogId);
 
 }

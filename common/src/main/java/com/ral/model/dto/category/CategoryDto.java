@@ -1,4 +1,4 @@
-package com.ral.model.dto.catalog;
+package com.ral.model.dto.category;
 
 import com.ral.util.tree.IRalTreeDto;
 
@@ -6,9 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by victor on 2018/1/26.
+ * @author victor
+ * @desc
+ * @date 2018/1/26 20:54
  */
-public class CatalogDto implements IRalTreeDto<CatalogDto> {
+public class CategoryDto implements IRalTreeDto<CategoryDto> {
 
     private Long id;
 
@@ -16,51 +18,33 @@ public class CatalogDto implements IRalTreeDto<CatalogDto> {
 
     private Long logo;
 
-    private String logoUrl;
-
     private Integer levl;
 
     private Long parentId;
 
     private Boolean isEnable;
 
-    private List<CatalogDto> childrens = new ArrayList<>();//子节点
+    private List<CategoryDto> childrens = new ArrayList<>();
 
-    /**
-     * 要求存在父级节点ID
-     *
-     * @return
-     */
-    @Override
-    public String getParentKey() {
-        return parentId.toString();
-    }
-
-    /**
-     * 默认父级节点，如第一级的父级ID
-     *
-     * @return
-     */
-    @Override
-    public String getDefaultParentKey() {
-        return "0";
-    }
-
-    /**
-     * 获取当前节点的KEY
-     *
-     * @return
-     */
     @Override
     public String getKey() {
         return id.toString();
     }
 
     @Override
-    public List<CatalogDto> getChildrens() {
-        return childrens;
+    public String getParentKey() {
+        return parentId == null ? "0" : parentId.toString();
     }
 
+    @Override
+    public String getDefaultParentKey() {
+        return "0";
+    }
+
+    @Override
+    public List<CategoryDto> getChildrens() {
+        return childrens;
+    }
 
     public Long getId() {
         return id;
@@ -84,14 +68,6 @@ public class CatalogDto implements IRalTreeDto<CatalogDto> {
 
     public void setLogo(Long logo) {
         this.logo = logo;
-    }
-
-    public String getLogoUrl() {
-        return logoUrl;
-    }
-
-    public void setLogoUrl(String logoUrl) {
-        this.logoUrl = logoUrl;
     }
 
     public Integer getLevl() {
@@ -118,9 +94,7 @@ public class CatalogDto implements IRalTreeDto<CatalogDto> {
         isEnable = enable;
     }
 
-    public void setChildrens(List<CatalogDto> childrens) {
+    public void setChildrens(List<CategoryDto> childrens) {
         this.childrens = childrens;
     }
-
-
 }

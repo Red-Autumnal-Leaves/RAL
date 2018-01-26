@@ -1,9 +1,5 @@
 package com.ral.util.tree;
 
-import com.ral.model.dto.IRalTreeDto;
-import com.ral.model.dto.catalog.CatalogDto;
-import com.ral.util.codec.JSONUtils;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,13 +39,6 @@ public class RalTreeDtoConvertUtils {
                 parent.getChildrens().add(node);
             }
         }
-    }
-
-
-    public static void main(String[] args) {
-        List<CatalogDto> dtos = new ArrayList<>();
-        List<CatalogDto> tree = RalTreeDtoConvertUtils.convertToTree(dtos);
-        System.out.println(JSONUtils.toJson(tree));
     }
 
 

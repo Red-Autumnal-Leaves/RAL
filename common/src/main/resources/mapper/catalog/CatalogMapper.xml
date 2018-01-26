@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ral.dao.catalog.CatalogMapper" >
+
+  <cache eviction="FIFO" type="com.ral.config.MybatisRedisCache" flushInterval="60000" size="512" readOnly="true"  />
+
   <resultMap id="BaseResultMap" type="com.ral.model.entity.catalog.Catalog" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="name" property="name" jdbcType="VARCHAR" />
@@ -13,6 +16,11 @@
     <result column="last_update_user" property="lastUpdateUser" jdbcType="VARCHAR" />
     <result column="last_update_time" property="lastUpdateTime" jdbcType="TIMESTAMP" />
   </resultMap>
+  <resultMap id="DtoResultMap" type="com.ral.model.dto.catalog.CatalogDto" extends="BaseResultMap">
+    <result column="url" property="logoUrl" jdbcType="VARCHAR" />
+  </resultMap>
+
+
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
@@ -290,8 +298,14 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
   
-  <select id="selectByCatalogId" resultType="com.ral.model.dto.catalog.CatalogDto">
+  <select id="queryAllDto" resultMap="DtoResultMap">
+    select c.id,c.`name`,c.logo,image.url,c.is_enable,c.parent_id,c.levl from catalog as c LEFT  JOIN image on image.id = c.logo ;
+  </select>
 
+  <select id="queryDtoById" resultMap="DtoResultMap">
+    select c.id,c.`name`,c.logo,image.url,c.is_enable,c.parent_id,c.levl
+    from catalog as c LEFT  JOIN image on image.id = c.logo
+    WHERE c.id = #{catalogId};
   </select>
 
 </mapper>
