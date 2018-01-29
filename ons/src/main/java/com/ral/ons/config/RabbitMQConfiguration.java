@@ -1,4 +1,4 @@
-package com.ral.config;
+package com.ral.ons.config;
 
 import org.apache.log4j.Logger;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
