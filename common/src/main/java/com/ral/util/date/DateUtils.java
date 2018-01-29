@@ -17,6 +17,8 @@ import java.util.GregorianCalendar;
 public final class DateUtils {
 	
 	public static final String YYYY_MM_DD_HH_MM_SS = "yyyy-MM-dd HH:mm:ss";
+
+	public static final String YYYY_MM_DD = "yyyy-MM-dd";
 	
 	private static SimpleDateFormat sdf = new SimpleDateFormat(DateUtils.YYYY_MM_DD_HH_MM_SS);
 

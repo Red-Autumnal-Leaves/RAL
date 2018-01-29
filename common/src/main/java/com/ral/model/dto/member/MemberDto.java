@@ -1,5 +1,8 @@
 package com.ral.model.dto.member;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.ral.util.date.DateUtils;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -60,6 +63,7 @@ public class MemberDto implements Serializable {
         this.sex = sex;
     }
 
+    @JsonFormat(pattern = DateUtils.YYYY_MM_DD)
     public Date getBirth() {
         return birth;
     }
@@ -132,6 +136,7 @@ public class MemberDto implements Serializable {
         this.status = status;
     }
 
+    @JsonFormat(pattern = DateUtils.YYYY_MM_DD_HH_MM_SS)
     public Date getCreateTime() {
         return createTime;
     }
@@ -140,6 +145,7 @@ public class MemberDto implements Serializable {
         this.createTime = createTime;
     }
 
+    @JsonFormat(pattern = DateUtils.YYYY_MM_DD_HH_MM_SS)
     public Date getLastUpdateTime() {
         return lastUpdateTime;
     }

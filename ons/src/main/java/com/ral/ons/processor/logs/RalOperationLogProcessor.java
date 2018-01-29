@@ -1,4 +1,4 @@
-package com.ral.ons.processor.example;
+package com.ral.ons.processor.logs;
 
 import com.ral.constants.queue.MQConstant;
 import com.ral.mongo.ral.entity.logs.RalOperationLog;

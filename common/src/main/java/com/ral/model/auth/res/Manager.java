@@ -1,5 +1,8 @@
 package com.ral.model.auth.res;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.ral.util.date.DateUtils;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -90,6 +93,7 @@ public class Manager implements Serializable{
 		this.status = status;
 	}
 
+	@JsonFormat(pattern = DateUtils.YYYY_MM_DD_HH_MM_SS)
 	public Date getCreateTime() {
 		return createTime;
 	}
@@ -98,6 +102,7 @@ public class Manager implements Serializable{
 		this.createTime = createTime;
 	}
 
+	@JsonFormat(pattern = DateUtils.YYYY_MM_DD_HH_MM_SS)
 	public Date getLastUpdateTime() {
 		return lastUpdateTime;
 	}
