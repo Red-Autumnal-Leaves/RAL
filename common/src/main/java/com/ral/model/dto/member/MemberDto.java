@@ -1,14 +1,16 @@
-package com.ral.model.entity.member;
+package com.ral.model.dto.member;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Member {
+/**
+ * Created by victor on 2018/1/29.
+ */
+public class MemberDto implements Serializable {
 
     private Long id;
 
     private String username;
-
-    private String password;
 
     private Integer sex;
 
@@ -20,17 +22,19 @@ public class Member {
 
     private Long header;
 
+    private String headerUrl;
+
     private Integer integral;
 
     private Long memberType;
+
+    private String memberTypeName;
 
     private Integer status;
 
     private Date createTime;
 
     private Date lastUpdateTime;
-
-    private Boolean isDisable;
 
     public Long getId() {
         return id;
@@ -45,15 +49,7 @@ public class Member {
     }
 
     public void setUsername(String username) {
-        this.username = username == null ? null : username.trim();
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password == null ? null : password.trim();
+        this.username = username;
     }
 
     public Integer getSex() {
@@ -77,7 +73,7 @@ public class Member {
     }
 
     public void setPhone(String phone) {
-        this.phone = phone == null ? null : phone.trim();
+        this.phone = phone;
     }
 
     public String getEmail() {
@@ -85,7 +81,7 @@ public class Member {
     }
 
     public void setEmail(String email) {
-        this.email = email == null ? null : email.trim();
+        this.email = email;
     }
 
     public Long getHeader() {
@@ -94,6 +90,14 @@ public class Member {
 
     public void setHeader(Long header) {
         this.header = header;
+    }
+
+    public String getHeaderUrl() {
+        return headerUrl;
+    }
+
+    public void setHeaderUrl(String headerUrl) {
+        this.headerUrl = headerUrl;
     }
 
     public Integer getIntegral() {
@@ -110,6 +114,14 @@ public class Member {
 
     public void setMemberType(Long memberType) {
         this.memberType = memberType;
+    }
+
+    public String getMemberTypeName() {
+        return memberTypeName;
+    }
+
+    public void setMemberTypeName(String memberTypeName) {
+        this.memberTypeName = memberTypeName;
     }
 
     public Integer getStatus() {
@@ -134,13 +146,5 @@ public class Member {
 
     public void setLastUpdateTime(Date lastUpdateTime) {
         this.lastUpdateTime = lastUpdateTime;
-    }
-
-    public Boolean getIsDisable() {
-        return isDisable;
-    }
-
-    public void setIsDisable(Boolean isDisable) {
-        this.isDisable = isDisable;
     }
 }

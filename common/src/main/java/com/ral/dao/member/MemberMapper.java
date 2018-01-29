@@ -2,8 +2,10 @@ package com.ral.dao.member;
 
 import java.util.List;
 
+import com.ral.model.dto.member.MemberDto;
 import com.ral.model.entity.member.Member;
 import com.ral.model.entity.member.MemberExample;
+import com.ral.model.query.member.MemberQuery;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -31,4 +33,11 @@ public interface MemberMapper {
     int updateByPrimaryKeySelective(Member record);
 
     int updateByPrimaryKey(Member record);
+
+    int queryCount(MemberQuery query);
+
+    List<MemberDto> query(MemberQuery query);
+
+    MemberDto getMemberDto(@Param("id")Long id);
+
 }

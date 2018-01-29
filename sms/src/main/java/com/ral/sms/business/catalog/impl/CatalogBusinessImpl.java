@@ -22,6 +22,6 @@ public class CatalogBusinessImpl implements ICatalogBusiness {
     public Result tree(HttpServletRequest request) {
         CatalogExample example = new CatalogExample();
         example.createCriteria().andIsEnableEqualTo(true);
-        return Result.initSuccessResult(catalogService.getAllTree(example),null);
+        return Result.initSuccessResult(catalogService.getAllTree(),null);
     }
 }

@@ -17,6 +17,8 @@
     <result column="last_update_time" property="lastUpdateTime" jdbcType="TIMESTAMP" />
     <result column="is_disable" property="isDisable" jdbcType="BIT" />
   </resultMap>
+
+  
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
@@ -351,4 +353,78 @@
       is_disable = #{isDisable,jdbcType=BIT}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+
+
+
+
+  <!--自定义-->
+
+  <resultMap id="DtoResultMap" type="com.ral.model.dto.member.MemberDto" extends="BaseResultMap">
+    <result column="header_url" property="headerUrl" jdbcType="VARCHAR" />
+    <result column="member_type_name" property="memberTypeName" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <sql id="query_dto_column_list">
+    m.id, m.username, m.sex, m.birth, m.phone, m.email,
+    m.`header`,image.url as 'header_url', m.integral,
+    m.member_type, mt.name as 'member_type_name',
+    m.`status`, m.create_time, m.last_update_time
+  </sql>
+
+  <sql id="query_dto_from_table_sql">
+    member  as m
+    LEFT JOIN member_type as mt on mt.id = m.member_type
+    LEFT JOIN image on image.id = m.header
+  </sql>
+
+  <sql id="query_dto_where_sql">
+    <where>
+      m.is_disable = FALSE
+      <if test="username != null">
+        and m.username = #{username}
+      </if>
+      <if test="sex != null">
+        and m.`sex` = #{sex}
+      </if>
+      <if test="phone != null">
+        and m.`phone` = #{phone}
+      </if>
+      <if test="email != null">
+        and m.`email` = #{email}
+      </if>
+      <if test="memberType != null">
+        and m.`member_type` = #{memberType}
+      </if>
+      <if test="status != null">
+        and m.`status` = #{status}
+      </if>
+    </where>
+    ORDER BY m.create_time DESC
+  </sql>
+
+  <select id="query" resultMap="DtoResultMap" parameterType="com.ral.model.query.member.MemberQuery">
+      SELECT
+        <include refid="query_dto_column_list"/>
+      FROM
+        <include refid="query_dto_from_table_sql"/>
+        <include refid="query_dto_where_sql" />
+      LIMIT #{offset},#{rows};
+  </select>
+
+  <select id="queryCount" resultType="int" parameterType="com.ral.model.query.member.MemberQuery">
+    SELECT count(1) FROM
+    <include refid="query_dto_from_table_sql"/>
+    <include refid="query_dto_where_sql" />
+  </select>
+
+  <select id="getMemberDto" resultMap="DtoResultMap">
+    SELECT
+      <include refid="query_dto_column_list"/>
+    FROM
+    <include refid="query_dto_from_table_sql"/>
+    WHERE m.is_disable = false and id = #{id}
+  </select>
+
+
 </mapper>
