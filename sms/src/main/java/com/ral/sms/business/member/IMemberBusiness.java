@@ -1,5 +1,6 @@
 package com.ral.sms.business.member;
 
+import com.ral.model.auth.res.Manager;
 import com.ral.model.query.member.MemberQuery;
 import com.ral.model.res.Result;
 
@@ -14,5 +15,5 @@ public interface IMemberBusiness {
 
     Result detail(HttpServletRequest request,Long id);
 
-    Result enable(HttpServletRequest request,Long id, Integer status);
+    Result enable(HttpServletRequest request, Long id, Integer status, Manager manager);
 }

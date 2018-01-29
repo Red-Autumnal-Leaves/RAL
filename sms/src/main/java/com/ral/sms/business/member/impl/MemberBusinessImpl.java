@@ -1,13 +1,17 @@
 package com.ral.sms.business.member.impl;
 
+import com.ral.model.auth.res.Manager;
 import com.ral.model.dto.member.MemberDto;
 import com.ral.model.entity.member.Member;
 import com.ral.model.enums.HttpStatusEnum;
+import com.ral.model.enums.logs.RalOperationResultEnum;
+import com.ral.model.enums.logs.RalOperationTypeEnum;
 import com.ral.model.enums.member.MemberStatusEnum;
 import com.ral.model.query.Query;
 import com.ral.model.query.member.MemberQuery;
 import com.ral.model.res.Result;
 import com.ral.service.member.IMemberService;
+import com.ral.service.mongo.IRalOperationLogService;
 import com.ral.sms.business.member.IMemberBusiness;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +28,9 @@ public class MemberBusinessImpl implements IMemberBusiness {
     @Autowired
     private IMemberService memberService;
 
+    @Autowired
+    private IRalOperationLogService ralOperationLogService;
+
     @Override
     public Result query(HttpServletRequest request, MemberQuery query) {
         query.setPageNow(query.getPageNow() == null || query.getPageNow()<= 0 ? 1 :query.getPageNow());
@@ -39,7 +46,7 @@ public class MemberBusinessImpl implements IMemberBusiness {
     }
 
     @Override
-    public Result enable(HttpServletRequest request, Long id, Integer status) {
+    public Result enable(HttpServletRequest request, Long id, Integer status, Manager manager) {
         Member member = memberService.getMemberById(id);
         if(member == null){
             return Result.initErrorResult(HttpStatusEnum.BAD_REQUEST,"Member id " + id + " is not exits");
@@ -50,9 +57,14 @@ public class MemberBusinessImpl implements IMemberBusiness {
         }
         try {
             memberService.updateStatus(id,statusEnum);
+            //add log
+            String content = String.format("[%s],修改会员状态 :%s",manager.getName(),status);
+            ralOperationLogService.logger(RalOperationTypeEnum.MEMBER_ENABLE_LOG,id.toString(),content, RalOperationResultEnum.INFO);
         }catch (Exception ex){
             return Result.initErrorResult("System error！");
         }
         return Result.initSuccessResult(null,null);
     }
+
+
 }

@@ -11,7 +11,9 @@ import com.ral.model.enums.IndexedEnumUtil;
  */
 public enum RalOperationTypeEnum implements IndexedEnum<RalOperationTypeEnum> {
 
-    AUTH_USER_LOGIN(1,"AUTH用户登录日志",RalOperationSourceEnum.RAL_AUTH);
+    AUTH_USER_LOGIN(1,"AUTH用户登录日志",RalOperationSourceEnum.RAL_AUTH),
+    MEMBER_ENABLE_LOG(2,"会员禁用日志",RalOperationSourceEnum.RAL_SHOP_SMS)
+    ;
 
     RalOperationTypeEnum(int index,String name,RalOperationSourceEnum source){
         this.index  = index;
