@@ -1,4 +1,4 @@
-package com.ral.ons.config;
+package com.ral.config;
 
 import org.apache.log4j.Logger;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
@@ -40,6 +40,7 @@ public class RabbitMQConfiguration {
 		connectionFactory.setVirtualHost("/");
 		connectionFactory.setPublisherConfirms(true);
 		logger.debug("Create ConnectionFactory bean ..");
+		logger.info(connectionFactory.getHost());
 		return connectionFactory;
 	}
 
