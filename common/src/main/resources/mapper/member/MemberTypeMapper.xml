@@ -319,4 +319,57 @@
       last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+
+  <!--自定义-->
+  <resultMap id="DtoResultMap" type="com.ral.model.dto.member.MemberTypeDto" extends="BaseResultMap">
+    <result column="icon_url" property="iconUrl" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <sql id="query_dto_column_list">
+    mt.id,mt.name,mt.icon,image.url as 'icon_url', mt.min, mt.max,mt.is_discount,mt.discount,mt.`desc`, mt.create_user,mt.create_time,mt.last_update_user,mt.last_update_time
+  </sql>
+
+  <sql id="query_dto_from_table_sql">
+    member_type as mt LEFT JOIN image on image.id = mt.icon
+  </sql>
+
+  <sql id="query_dto_where_sql">
+    <where>
+      <if test="name != null">
+        and mt.name like '%${name}%'
+      </if>
+    </where>
+  </sql>
+
+  <select id="query" resultMap="DtoResultMap" parameterType="com.ral.model.query.member.MemberTypeQuery">
+    SELECT
+    <include refid="query_dto_column_list"/>
+    FROM
+    <include refid="query_dto_from_table_sql"/>
+    <include refid="query_dto_where_sql" />
+    LIMIT #{offset},#{rows};
+  </select>
+
+  <select id="queryCount" resultType="int" parameterType="com.ral.model.query.member.MemberQuery">
+    SELECT count(1) FROM
+    <include refid="query_dto_from_table_sql"/>
+    <include refid="query_dto_where_sql" />
+  </select>
+
+  <select id="getDtoById" resultMap="DtoResultMap">
+    SELECT
+    <include refid="query_dto_column_list"/>
+    FROM
+    <include refid="query_dto_from_table_sql"/>
+    WHERE  mt.id = #{id}
+  </select>
+
+  <select id="getAll" resultMap="DtoResultMap">
+    SELECT
+    <include refid="query_dto_column_list"/>
+    FROM
+    <include refid="query_dto_from_table_sql"/>
+  </select>
+
 </mapper>

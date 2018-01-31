@@ -1,8 +1,15 @@
-package com.ral.model.entity.base;
+package com.ral.model.dto.base;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.ral.util.date.DateUtils;
+
+import java.io.Serializable;
 import java.util.Date;
 
-public class Image {
+/**
+ * Created by victor on 2018/1/31.
+ */
+public class ImageDto implements Serializable{
 
     private Long id;
 
@@ -15,8 +22,6 @@ public class Image {
     private String url;
 
     private Date createTime;
-
-    private Date lastUpdateTime;
 
     public Long getId() {
         return id;
@@ -39,7 +44,7 @@ public class Image {
     }
 
     public void setSize(String size) {
-        this.size = size == null ? null : size.trim();
+        this.size = size;
     }
 
     public String getName() {
@@ -47,7 +52,7 @@ public class Image {
     }
 
     public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+        this.name = name;
     }
 
     public String getUrl() {
@@ -55,22 +60,15 @@ public class Image {
     }
 
     public void setUrl(String url) {
-        this.url = url == null ? null : url.trim();
+        this.url = url;
     }
 
+    @JsonFormat(pattern = DateUtils.YYYY_MM_DD_HH_MM_SS)
     public Date getCreateTime() {
         return createTime;
     }
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
-    }
-
-    public Date getLastUpdateTime() {
-        return lastUpdateTime;
-    }
-
-    public void setLastUpdateTime(Date lastUpdateTime) {
-        this.lastUpdateTime = lastUpdateTime;
     }
 }

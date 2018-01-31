@@ -2,8 +2,10 @@ package com.ral.dao.member;
 
 import java.util.List;
 
+import com.ral.model.dto.member.MemberTypeDto;
 import com.ral.model.entity.member.MemberType;
 import com.ral.model.entity.member.MemberTypeExample;
+import com.ral.model.query.member.MemberTypeQuery;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -31,4 +33,12 @@ public interface MemberTypeMapper {
     int updateByPrimaryKeySelective(MemberType record);
 
     int updateByPrimaryKey(MemberType record);
+
+    int queryCount(MemberTypeQuery query);
+
+    List<MemberTypeDto> query(MemberTypeQuery query);
+
+    MemberTypeDto getDtoById(@Param("id")Long id);
+
+    List<MemberTypeDto> getAll();
 }

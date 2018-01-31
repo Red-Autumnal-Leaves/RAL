@@ -31,4 +31,6 @@ public interface ImageMapper {
     int updateByPrimaryKeySelective(Image record);
 
     int updateByPrimaryKey(Image record);
+
+    int batchInsert(List<Image> images);
 }

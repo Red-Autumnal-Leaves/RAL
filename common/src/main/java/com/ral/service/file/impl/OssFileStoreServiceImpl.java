@@ -5,6 +5,7 @@ import com.aliyun.oss.model.GeneratePresignedUrlRequest;
 import com.aliyun.oss.model.GetObjectRequest;
 import com.aliyun.oss.model.OSSObject;
 import com.aliyun.oss.model.ObjectMetadata;
+import com.ral.constants.RalConstants;
 import com.ral.util.codec.UUIDUtils;
 import com.ral.exception.ServiceException;
 import com.ral.model.domain.OssUploadResponse;
@@ -197,10 +198,9 @@ public class OssFileStoreServiceImpl implements IFileStoreService {
 		return metadata;
 	}
 
-	
 	@Override
 	public String getBucketName() {
-		return null;
+		return RalConstants.OSS_DEFAULT_BUCKET_NAME;
 	}
 
 	@Override

@@ -8,7 +8,8 @@ import java.nio.charset.Charset;
  * @desc 全局常量
  */
 public final class RalConstants {
-	
+
+
 	private RalConstants(){}
 	
 	/**
@@ -44,7 +45,11 @@ public final class RalConstants {
 	 * HTTP请求默认超时时间
 	 */
 	public static final int DEFAULT_HTTP_TIMEOUT = 90000;
-	
-	
+
+
+	/**
+	 * 阿里云OSS 默认bucket name
+	 */
+	public static final String OSS_DEFAULT_BUCKET_NAME = "ral-shop";
 	
 }

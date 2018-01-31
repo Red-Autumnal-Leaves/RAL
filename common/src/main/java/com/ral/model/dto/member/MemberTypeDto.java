@@ -1,15 +1,24 @@
-package com.ral.model.entity.member;
+package com.ral.model.dto.member;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.ral.util.date.DateUtils;
+
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class MemberType {
+/**
+ * Created by victor on 2018/1/31.
+ */
+public class MemberTypeDto implements Serializable{
 
     private Long id;
 
     private String name;
 
     private Long icon;
+
+    private String iconUrl;
 
     private BigDecimal min;
 
@@ -42,7 +51,7 @@ public class MemberType {
     }
 
     public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+        this.name = name;
     }
 
     public Long getIcon() {
@@ -51,6 +60,14 @@ public class MemberType {
 
     public void setIcon(Long icon) {
         this.icon = icon;
+    }
+
+    public String getIconUrl() {
+        return iconUrl;
+    }
+
+    public void setIconUrl(String iconUrl) {
+        this.iconUrl = iconUrl;
     }
 
     public BigDecimal getMin() {
@@ -69,16 +86,8 @@ public class MemberType {
         this.max = max;
     }
 
-    public Boolean getIsDiscount() {
+    public Boolean getDiscount() {
         return isDiscount;
-    }
-
-    public void setIsDiscount(Boolean isDiscount) {
-        this.isDiscount = isDiscount;
-    }
-
-    public BigDecimal getDiscount() {
-        return discount;
     }
 
     public void setDiscount(BigDecimal discount) {
@@ -90,7 +99,7 @@ public class MemberType {
     }
 
     public void setDesc(String desc) {
-        this.desc = desc == null ? null : desc.trim();
+        this.desc = desc;
     }
 
     public String getCreateUser() {
@@ -98,9 +107,10 @@ public class MemberType {
     }
 
     public void setCreateUser(String createUser) {
-        this.createUser = createUser == null ? null : createUser.trim();
+        this.createUser = createUser;
     }
 
+    @JsonFormat(pattern = DateUtils.YYYY_MM_DD_HH_MM_SS)
     public Date getCreateTime() {
         return createTime;
     }
@@ -114,14 +124,19 @@ public class MemberType {
     }
 
     public void setLastUpdateUser(String lastUpdateUser) {
-        this.lastUpdateUser = lastUpdateUser == null ? null : lastUpdateUser.trim();
+        this.lastUpdateUser = lastUpdateUser;
     }
 
+    @JsonFormat(pattern = DateUtils.YYYY_MM_DD_HH_MM_SS)
     public Date getLastUpdateTime() {
         return lastUpdateTime;
     }
 
     public void setLastUpdateTime(Date lastUpdateTime) {
         this.lastUpdateTime = lastUpdateTime;
+    }
+
+    public void setDiscount(Boolean discount) {
+        isDiscount = discount;
     }
 }

@@ -16,7 +16,8 @@ public enum IdTypeEnums implements IndexedEnum<IdTypeEnums> {
     SKU(3,"SKU",""),
     BARCODE(4,"条码",""),
     ORDER(5,"订单","SO"),
-    REQUEST(6,"HTTP 请求","");
+    REQUEST(6,"HTTP 请求",""),
+    ;
 
     private int index;
 

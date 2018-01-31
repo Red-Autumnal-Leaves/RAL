@@ -423,7 +423,7 @@
       <include refid="query_dto_column_list"/>
     FROM
     <include refid="query_dto_from_table_sql"/>
-    WHERE m.is_disable = false and id = #{id}
+    WHERE m.is_disable = false and m.id = #{id}
   </select>
 
 

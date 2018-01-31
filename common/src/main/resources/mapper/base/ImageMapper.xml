@@ -241,4 +241,15 @@
       last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+
+  <!--自定义-->
+  <insert id="batchInsert" >
+    INSERT INTO image(type, size, name, url)  VALUES
+    <foreach collection="images" item="item" index="index" separator=",">
+      (#{item.type}, #{item.size},#{item.name},#{item.url})
+    </foreach>
+
+  </insert>
+
 </mapper>
