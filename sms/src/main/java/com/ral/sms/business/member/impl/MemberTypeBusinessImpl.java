@@ -115,7 +115,7 @@ public class MemberTypeBusinessImpl implements IMemberTypeBusiness {
             throw new ParamsException("The 'isDiscount' cannot be empty");
         }
         if(memberType.getIsDiscount()){
-            if(memberType.getDiscount().doubleValue() <= 0 || memberType.getDiscount().doubleValue() > 1){
+            if(memberType.getDiscount() == null || memberType.getDiscount().doubleValue() <= 0 || memberType.getDiscount().doubleValue() > 1){
                 throw new ParamsException("The 'discount' must be greater than 0, less than 1");
             }
         }

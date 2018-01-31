@@ -6,9 +6,11 @@ public class Image {
 
     private Long id;
 
+    private String fileId;
+
     private Integer type;
 
-    private String size;
+    private Long size;
 
     private String name;
 
@@ -26,6 +28,14 @@ public class Image {
         this.id = id;
     }
 
+    public String getFileId() {
+        return fileId;
+    }
+
+    public void setFileId(String fileId) {
+        this.fileId = fileId == null ? null : fileId.trim();
+    }
+
     public Integer getType() {
         return type;
     }
@@ -34,12 +44,12 @@ public class Image {
         this.type = type;
     }
 
-    public String getSize() {
+    public Long getSize() {
         return size;
     }
 
-    public void setSize(String size) {
-        this.size = size == null ? null : size.trim();
+    public void setSize(Long size) {
+        this.size = size;
     }
 
     public String getName() {

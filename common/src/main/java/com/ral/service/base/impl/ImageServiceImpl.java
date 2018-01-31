@@ -4,6 +4,7 @@ import com.ral.dao.base.ImageMapper;
 import com.ral.model.entity.base.Image;
 import com.ral.model.entity.base.ImageExample;
 import com.ral.service.base.IImageService;
+import org.apache.tools.ant.taskdefs.EchoXML;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,10 +29,16 @@ public class ImageServiceImpl implements IImageService {
      */
     @Override
     public List<Image> save(List<Image> images) {
-        for(Image image : images){
-            imageMapper.insertSelective(image);
+        List<String> fileIds = new ArrayList<>();
+        if(images != null && !images.isEmpty()){
+            images.forEach(image -> {
+                fileIds.add(image.getFileId());
+            });
+            if(imageMapper.batchInsert(images) > 0){
+                return getByFileIds(fileIds);
+            }
         }
-        return images;
+        return new ArrayList<>();
     }
 
     /**
@@ -81,6 +88,17 @@ public class ImageServiceImpl implements IImageService {
     public List<Image> getByIds(List<Long> ids) {
         ImageExample example = new ImageExample();
         example.createCriteria().andIdIn(ids);
+        List<Image> images = imageMapper.selectByExample(example);
+        return images == null ? new ArrayList<>() : images;
+    }
+
+    @Override
+    public List<Image> getByFileIds(List<String> fileIds) {
+        if(fileIds == null || fileIds.isEmpty()){
+            return new ArrayList<>();
+        }
+        ImageExample example = new ImageExample();
+        example.createCriteria().andFileIdIn(fileIds);
         List<Image> images = imageMapper.selectByExample(example);
         return images == null ? new ArrayList<>() : images;
     }

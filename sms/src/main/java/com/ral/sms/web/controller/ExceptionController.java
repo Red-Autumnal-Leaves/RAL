@@ -5,9 +5,12 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.ral.exception.ParamsException;
+import com.ral.exception.ServiceException;
 import com.ral.model.enums.HttpStatusEnum;
 import com.ral.model.res.Result;
 import com.ral.util.codec.BeanUtils;
+import com.ral.util.codec.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.web.BasicErrorController;
 import org.springframework.boot.autoconfigure.web.DefaultErrorAttributes;
@@ -49,7 +52,8 @@ public class ExceptionController extends BasicErrorController {
     		case 404:
     			return this.notfound(request);
     		case 500:
-    			return this.exception(request);
+
+    			return this.exception(request,error);
 		}
     	//default
     	Result resp = new Result(HttpStatusEnum.ERROR,false);
@@ -76,14 +80,7 @@ public class ExceptionController extends BasicErrorController {
     	Map<String, Object> map = BeanUtils.beanToMap(resp);
     	return new ResponseEntity<Map<String, Object>>(map, getStatus(request));
     }
-    
-    private ResponseEntity<Map<String, Object>> exception(HttpServletRequest request){
-    	Result resp = new Result(HttpStatusEnum.ERROR, false);
-    	resp.setMsg("系统错误！");
-    	Map<String, Object> map = BeanUtils.beanToMap(resp);
-    	return new ResponseEntity<Map<String, Object>>(map, getStatus(request));
-    }
-    
+
     private ResponseEntity<Map<String, Object>> notAuthorized(HttpServletRequest request) {
     	Result resp = new Result(HttpStatusEnum.NOT_AUTHORIZED, false);
     	resp.setMsg("请求未授权！");
@@ -97,5 +94,26 @@ public class ExceptionController extends BasicErrorController {
     	Map<String, Object> map = BeanUtils.beanToMap(resp);
     	return new ResponseEntity<Map<String, Object>>(map, getStatus(request));
     }
-    
+
+
+	private ResponseEntity<Map<String, Object>> exception(HttpServletRequest request,Map<String,Object> error){
+		String exceptionClassName = error.get("exception").toString();
+		String exceptionMessage = error.get("message").toString();
+		if(!StringUtils.isNullOrEmpty(exceptionClassName)){
+			if(exceptionClassName.equalsIgnoreCase(ParamsException.class.getName())){//参数异常
+				Result resp = Result.initErrorResult(HttpStatusEnum.BAD_REQUEST,exceptionMessage);
+				return new ResponseEntity<Map<String, Object>>(BeanUtils.beanToMap(resp), getStatus(request));
+			}
+			if(exceptionClassName.equalsIgnoreCase(ServiceException.class.getName())){//系统异常
+				Result resp = Result.initErrorResult(HttpStatusEnum.ERROR,"Service Exception!");
+				return new ResponseEntity<Map<String, Object>>(BeanUtils.beanToMap(resp), getStatus(request));
+			}
+		}
+		Result resp = new Result(HttpStatusEnum.ERROR, false);
+		return new ResponseEntity<Map<String, Object>>(BeanUtils.beanToMap(resp), getStatus(request));
+	}
+
+
+
+
 }

@@ -86,13 +86,7 @@ public class MemberTypeDto implements Serializable{
         this.max = max;
     }
 
-    public Boolean getDiscount() {
-        return isDiscount;
-    }
 
-    public void setDiscount(BigDecimal discount) {
-        this.discount = discount;
-    }
 
     public String getDesc() {
         return desc;
@@ -136,7 +130,21 @@ public class MemberTypeDto implements Serializable{
         this.lastUpdateTime = lastUpdateTime;
     }
 
-    public void setDiscount(Boolean discount) {
-        isDiscount = discount;
+    public void setDiscount(BigDecimal discount) {
+       this.discount = discount;
     }
+
+    public BigDecimal getDiscount() {
+       return discount;
+    }
+
+    public Boolean getIsDiscount() {
+        return isDiscount;
+    }
+
+    public void setIsDiscount(Boolean isDscount) {
+        this.isDiscount = isDscount;
+    }
+
+
 }

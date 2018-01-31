@@ -3,8 +3,9 @@
 <mapper namespace="com.ral.dao.base.ImageMapper" >
   <resultMap id="BaseResultMap" type="com.ral.model.entity.base.Image" >
     <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="file_id" property="fileId" jdbcType="VARCHAR" />
     <result column="type" property="type" jdbcType="INTEGER" />
-    <result column="size" property="size" jdbcType="VARCHAR" />
+    <result column="size" property="size" jdbcType="BIGINT" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="url" property="url" jdbcType="VARCHAR" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
@@ -69,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, `type`, `size`, `name`, url, create_time, last_update_time
+    id, file_id, `type`, `size`, `name`, url, create_time, last_update_time
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ral.model.entity.base.ImageExample" >
     select
@@ -103,11 +104,11 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.ral.model.entity.base.Image" >
-    insert into image (id, `type`, `size`, 
-      `name`, url, create_time, 
+    insert into image (id, file_id, `type`, 
+      `size`, `name`, url, create_time, 
       last_update_time)
-    values (#{id,jdbcType=BIGINT}, #{type,jdbcType=INTEGER}, #{size,jdbcType=VARCHAR}, 
-      #{name,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+    values (#{id,jdbcType=BIGINT}, #{fileId,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, 
+      #{size,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
       #{lastUpdateTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.ral.model.entity.base.Image" >
@@ -115,6 +116,9 @@
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
+      </if>
+      <if test="fileId != null" >
+        file_id,
       </if>
       <if test="type != null" >
         `type`,
@@ -139,11 +143,14 @@
       <if test="id != null" >
         #{id,jdbcType=BIGINT},
       </if>
+      <if test="fileId != null" >
+        #{fileId,jdbcType=VARCHAR},
+      </if>
       <if test="type != null" >
         #{type,jdbcType=INTEGER},
       </if>
       <if test="size != null" >
-        #{size,jdbcType=VARCHAR},
+        #{size,jdbcType=BIGINT},
       </if>
       <if test="name != null" >
         #{name,jdbcType=VARCHAR},
@@ -171,11 +178,14 @@
       <if test="record.id != null" >
         id = #{record.id,jdbcType=BIGINT},
       </if>
+      <if test="record.fileId != null" >
+        file_id = #{record.fileId,jdbcType=VARCHAR},
+      </if>
       <if test="record.type != null" >
         `type` = #{record.type,jdbcType=INTEGER},
       </if>
       <if test="record.size != null" >
-        `size` = #{record.size,jdbcType=VARCHAR},
+        `size` = #{record.size,jdbcType=BIGINT},
       </if>
       <if test="record.name != null" >
         `name` = #{record.name,jdbcType=VARCHAR},
@@ -197,8 +207,9 @@
   <update id="updateByExample" parameterType="map" >
     update image
     set id = #{record.id,jdbcType=BIGINT},
+      file_id = #{record.fileId,jdbcType=VARCHAR},
       `type` = #{record.type,jdbcType=INTEGER},
-      `size` = #{record.size,jdbcType=VARCHAR},
+      `size` = #{record.size,jdbcType=BIGINT},
       `name` = #{record.name,jdbcType=VARCHAR},
       url = #{record.url,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
@@ -210,11 +221,14 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.ral.model.entity.base.Image" >
     update image
     <set >
+      <if test="fileId != null" >
+        file_id = #{fileId,jdbcType=VARCHAR},
+      </if>
       <if test="type != null" >
         `type` = #{type,jdbcType=INTEGER},
       </if>
       <if test="size != null" >
-        `size` = #{size,jdbcType=VARCHAR},
+        `size` = #{size,jdbcType=BIGINT},
       </if>
       <if test="name != null" >
         `name` = #{name,jdbcType=VARCHAR},
@@ -233,8 +247,9 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.ral.model.entity.base.Image" >
     update image
-    set `type` = #{type,jdbcType=INTEGER},
-      `size` = #{size,jdbcType=VARCHAR},
+    set file_id = #{fileId,jdbcType=VARCHAR},
+      `type` = #{type,jdbcType=INTEGER},
+      `size` = #{size,jdbcType=BIGINT},
       `name` = #{name,jdbcType=VARCHAR},
       url = #{url,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -243,13 +258,12 @@
   </update>
 
 
+
   <!--自定义-->
   <insert id="batchInsert" >
-    INSERT INTO image(type, size, name, url)  VALUES
+    INSERT INTO image(type,file_id, size, name, url)  VALUES
     <foreach collection="images" item="item" index="index" separator=",">
-      (#{item.type}, #{item.size},#{item.name},#{item.url})
+      (#{item.type},#{item.fileId}, #{item.size},#{item.name},#{item.url})
     </foreach>
-
   </insert>
-
 </mapper>

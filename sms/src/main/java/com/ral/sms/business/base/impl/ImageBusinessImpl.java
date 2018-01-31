@@ -43,8 +43,7 @@ public class ImageBusinessImpl implements IImageBusiness {
         }
         ImageTypeEnum ite = ImageTypeEnum.indexOf(type);
         try {
-            List<Image> images = this.upload(files, ite);
-            imageService.save(images);
+            List<Image> images = imageService.save(upload(files, ite));
             return Result.initSuccessResult(convertToDto(images), null);
         } catch (Exception e) {
             logger.error("Upload file error :", e);
@@ -82,8 +81,12 @@ public class ImageBusinessImpl implements IImageBusiness {
         List<Image> images = new ArrayList<>();
         if(response.isSuccess()){
             for(ServerFileInfo info : response.getResponse()){
-                Image image = serverFileInfoToImage(info);
+                Image image = new Image();
                 image.setType(type.getIndex());
+                image.setFileId(info.getId() + "");
+                image.setName(info.getFileName());
+                image.setSize(info.getSize());
+                image.setUrl(info.getUrl());
                 images.add(image);
             }
         }else{
@@ -91,16 +94,6 @@ public class ImageBusinessImpl implements IImageBusiness {
             throw new ServiceException("Upload file to server error :" + response.getMsg());
         }
         return images;
-    }
-
-    private Image serverFileInfoToImage(ServerFileInfo info) {
-        Image image = new Image();
-        image.setCreateTime(info.getCreateTime() == null ? new Date() : info.getCreateTime());
-        //image.setFileId(info.getId() + "");
-        image.setName(info.getFileName());
-        image.setSize(info.getSize() + "");
-        image.setUrl(info.getUrl());
-        return image;
     }
 
     private ImageDto convertToDto(Image image){

@@ -165,6 +165,76 @@ public class ImageExample {
             return (Criteria) this;
         }
 
+        public Criteria andFileIdIsNull() {
+            addCriterion("file_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileIdIsNotNull() {
+            addCriterion("file_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileIdEqualTo(String value) {
+            addCriterion("file_id =", value, "fileId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileIdNotEqualTo(String value) {
+            addCriterion("file_id <>", value, "fileId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileIdGreaterThan(String value) {
+            addCriterion("file_id >", value, "fileId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileIdGreaterThanOrEqualTo(String value) {
+            addCriterion("file_id >=", value, "fileId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileIdLessThan(String value) {
+            addCriterion("file_id <", value, "fileId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileIdLessThanOrEqualTo(String value) {
+            addCriterion("file_id <=", value, "fileId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileIdLike(String value) {
+            addCriterion("file_id like", value, "fileId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileIdNotLike(String value) {
+            addCriterion("file_id not like", value, "fileId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileIdIn(List<String> values) {
+            addCriterion("file_id in", values, "fileId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileIdNotIn(List<String> values) {
+            addCriterion("file_id not in", values, "fileId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileIdBetween(String value1, String value2) {
+            addCriterion("file_id between", value1, value2, "fileId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileIdNotBetween(String value1, String value2) {
+            addCriterion("file_id not between", value1, value2, "fileId");
+            return (Criteria) this;
+        }
+
         public Criteria andTypeIsNull() {
             addCriterion("`type` is null");
             return (Criteria) this;
@@ -235,62 +305,52 @@ public class ImageExample {
             return (Criteria) this;
         }
 
-        public Criteria andSizeEqualTo(String value) {
+        public Criteria andSizeEqualTo(Long value) {
             addCriterion("`size` =", value, "size");
             return (Criteria) this;
         }
 
-        public Criteria andSizeNotEqualTo(String value) {
+        public Criteria andSizeNotEqualTo(Long value) {
             addCriterion("`size` <>", value, "size");
             return (Criteria) this;
         }
 
-        public Criteria andSizeGreaterThan(String value) {
+        public Criteria andSizeGreaterThan(Long value) {
             addCriterion("`size` >", value, "size");
             return (Criteria) this;
         }
 
-        public Criteria andSizeGreaterThanOrEqualTo(String value) {
+        public Criteria andSizeGreaterThanOrEqualTo(Long value) {
             addCriterion("`size` >=", value, "size");
             return (Criteria) this;
         }
 
-        public Criteria andSizeLessThan(String value) {
+        public Criteria andSizeLessThan(Long value) {
             addCriterion("`size` <", value, "size");
             return (Criteria) this;
         }
 
-        public Criteria andSizeLessThanOrEqualTo(String value) {
+        public Criteria andSizeLessThanOrEqualTo(Long value) {
             addCriterion("`size` <=", value, "size");
             return (Criteria) this;
         }
 
-        public Criteria andSizeLike(String value) {
-            addCriterion("`size` like", value, "size");
-            return (Criteria) this;
-        }
-
-        public Criteria andSizeNotLike(String value) {
-            addCriterion("`size` not like", value, "size");
-            return (Criteria) this;
-        }
-
-        public Criteria andSizeIn(List<String> values) {
+        public Criteria andSizeIn(List<Long> values) {
             addCriterion("`size` in", values, "size");
             return (Criteria) this;
         }
 
-        public Criteria andSizeNotIn(List<String> values) {
+        public Criteria andSizeNotIn(List<Long> values) {
             addCriterion("`size` not in", values, "size");
             return (Criteria) this;
         }
 
-        public Criteria andSizeBetween(String value1, String value2) {
+        public Criteria andSizeBetween(Long value1, Long value2) {
             addCriterion("`size` between", value1, value2, "size");
             return (Criteria) this;
         }
 
-        public Criteria andSizeNotBetween(String value1, String value2) {
+        public Criteria andSizeNotBetween(Long value1, Long value2) {
             addCriterion("`size` not between", value1, value2, "size");
             return (Criteria) this;
         }

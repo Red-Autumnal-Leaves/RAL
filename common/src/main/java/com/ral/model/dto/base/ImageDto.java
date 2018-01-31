@@ -15,7 +15,9 @@ public class ImageDto implements Serializable{
 
     private Integer type;
 
-    private String size;
+    private String fileId;
+
+    private Long size;
 
     private String name;
 
@@ -39,11 +41,11 @@ public class ImageDto implements Serializable{
         this.type = type;
     }
 
-    public String getSize() {
+    public Long getSize() {
         return size;
     }
 
-    public void setSize(String size) {
+    public void setSize(Long size) {
         this.size = size;
     }
 
@@ -70,5 +72,13 @@ public class ImageDto implements Serializable{
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public String getFileId() {
+        return fileId;
+    }
+
+    public void setFileId(String fileId) {
+        this.fileId = fileId;
     }
 }

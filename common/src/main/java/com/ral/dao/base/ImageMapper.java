@@ -32,5 +32,5 @@ public interface ImageMapper {
 
     int updateByPrimaryKey(Image record);
 
-    int batchInsert(List<Image> images);
+    int batchInsert(@Param("images")List<Image> images);
 }

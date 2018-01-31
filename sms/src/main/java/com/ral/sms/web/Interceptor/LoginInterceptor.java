@@ -7,16 +7,19 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.ral.model.auth.res.Manager;
 import com.ral.model.domain.AccessToken;
 import com.ral.model.enums.HttpStatusEnum;
 import com.ral.model.res.Result;
 import com.ral.service.session.ISessionService;
 import com.ral.service.token.ITokenService;
+import com.ral.sms.business.user.impl.UserBusinessImpl;
 import com.ral.sms.constants.SmsSystemConstants;
 import com.ral.util.codec.JSONUtils;
 import com.ral.util.codec.StringUtils;
 import com.ral.util.web.ActionUtil;
 import com.ral.util.web.CookieUtils;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
@@ -34,6 +37,8 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
  */
 @Component
 public class LoginInterceptor extends HandlerInterceptorAdapter{
+
+	private static Logger logger  = Logger.getLogger(LoginInterceptor.class);
 
 	@Autowired
 	private ITokenService tokenService;
@@ -92,6 +97,11 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 			Result modal = new Result(HttpStatusEnum.NOT_AUTHORIZED,"授权信息无效或登录超时,请重新登录！",false);
 			ActionUtil.ResponseJson(response, JSONUtils.toJson(modal));
 			return false;
+		}
+
+		Manager manager = sessionService.getAttribute(tokenId, SmsSystemConstants.SESSION_USER_KEY, Manager.class);
+		if(manager != null){
+			logger.info("[" + request.getRemoteAddr() + "][" + manager.getUserId() + "]["+ request.getMethod() + "]" + request.getContextPath() + request.getServletPath() );
 		}
 		return true;
 	}

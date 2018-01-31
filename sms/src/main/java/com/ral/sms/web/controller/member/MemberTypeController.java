@@ -3,6 +3,7 @@ package com.ral.sms.web.controller.member;
 import com.ral.model.query.member.MemberTypeQuery;
 import com.ral.model.res.Result;
 import com.ral.sms.business.member.IMemberTypeBusiness;
+import com.ral.sms.web.controller.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 @RestController
 @RequestMapping("/memberType/*")
-public class MemberTypeController {
+public class MemberTypeController extends BaseController{
 
     @Autowired
     private IMemberTypeBusiness memberTypeBusiness;

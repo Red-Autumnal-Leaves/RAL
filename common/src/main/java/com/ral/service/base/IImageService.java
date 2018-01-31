@@ -45,4 +45,11 @@ public interface IImageService {
      */
     List<Image> getByIds(List<Long> ids);
 
+    /**
+     * 根据fileId 查询
+     * @param fileIds
+     * @return
+     */
+    List<Image> getByFileIds(List<String> fileIds);
+
 }
