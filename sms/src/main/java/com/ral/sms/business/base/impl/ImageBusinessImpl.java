@@ -1,17 +1,17 @@
 package com.ral.sms.business.base.impl;
 
-import com.aliyun.oss.OSSException;
-import com.ral.model.domain.OssUploadResponse;
+import com.ral.exception.ServiceException;
 import com.ral.model.dto.base.ImageDto;
 import com.ral.model.entity.base.Image;
 import com.ral.model.enums.HttpStatusEnum;
 import com.ral.model.enums.base.ImageTypeEnum;
 import com.ral.model.res.Result;
 import com.ral.service.base.IImageService;
-import com.ral.service.file.IFileStoreService;
 import com.ral.sms.business.base.IImageBusiness;
-import com.ral.util.codec.JSONUtils;
-import com.ral.util.codec.UUIDUtils;
+import com.victor.sdk.domain.VictorClient;
+import com.victor.sdk.request.vos.UploadMultipartFileRequest;
+import com.victor.sdk.response.vos.ServerFileInfo;
+import com.victor.sdk.response.vos.UploadMultipartFileResponse;
 import org.apache.log4j.Logger;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,18 +33,10 @@ public class ImageBusinessImpl implements IImageBusiness {
     private IImageService imageService;
 
     @Autowired
-    private IFileStoreService fileStoreService;
+    private VictorClient victorClient;
 
-    /**
-     * 上传
-     *
-     * @param request
-     * @param files
-     * @param type
-     * @return
-     */
     @Override
-    public Result upload(HttpServletRequest request, MultipartFile[] files, Integer type) {
+    public Result upload(HttpServletRequest request, MultipartFile[] files,Integer type) {
         Result result  = this.checkUploadParams(files, type);
         if(!result.isSuccess()){
             return result;
@@ -52,6 +44,7 @@ public class ImageBusinessImpl implements IImageBusiness {
         ImageTypeEnum ite = ImageTypeEnum.indexOf(type);
         try {
             List<Image> images = this.upload(files, ite);
+            imageService.save(images);
             return Result.initSuccessResult(convertToDto(images), null);
         } catch (Exception e) {
             logger.error("Upload file error :", e);
@@ -60,30 +53,55 @@ public class ImageBusinessImpl implements IImageBusiness {
         }
     }
 
-
+    //校验
+    private Result checkUploadParams(MultipartFile[] files,Integer type){
+        if(type == null || type == 0){
+            return Result.initErrorResult(HttpStatusEnum.BAD_REQUEST, "Params error : type value is invalid!");
+        }
+        ImageTypeEnum ite = ImageTypeEnum.indexOf(type);
+        if(ite == null){
+            return Result.initErrorResult(HttpStatusEnum.BAD_REQUEST, "Params error : type value is invalid!");
+        }
+        if(files.length  == 0 ){
+            return Result.initErrorResult(HttpStatusEnum.BAD_REQUEST, "Params error : files is empty!");
+        }
+        return Result.initSuccessResult(null, null);
+    }
 
     //上传
     private List<Image> upload(MultipartFile[] files,ImageTypeEnum type) throws Exception{
-        List<Image> images = new ArrayList<>();
-        for(MultipartFile file : files){
-            Image image = new Image();
-            image.setName(file.getOriginalFilename());
-            image.setSize(file.getSize() + "");
-            OssUploadResponse response = fileStoreService.upload(file.getBytes(),UUIDUtils.uuid());
-            if(response.isSuccess()){
-                image.setUrl(response.getUrl());
-                images.add(image);
-            }else{
-                logger.error("upload file error: "  + JSONUtils.toJson(image));
-                throw new OSSException("upload file error!");
+        UploadMultipartFileRequest request = new UploadMultipartFileRequest(victorClient);
+        request.setTimestamp(new Date().getTime() / 1000 + "");
+        for(MultipartFile file : files ){
+            if(file == null || file.getSize() <=0){
+                continue;
             }
+            request.getFiles().add(file);
         }
-        if(!images.isEmpty()){
-            return imageService.save(images);
+        UploadMultipartFileResponse response = victorClient.request(request, UploadMultipartFileResponse.class);
+        List<Image> images = new ArrayList<>();
+        if(response.isSuccess()){
+            for(ServerFileInfo info : response.getResponse()){
+                Image image = serverFileInfoToImage(info);
+                image.setType(type.getIndex());
+                images.add(image);
+            }
+        }else{
+            logger.error("Upload file to server error :" + response.getMsg());
+            throw new ServiceException("Upload file to server error :" + response.getMsg());
         }
-        return null;
+        return images;
     }
 
+    private Image serverFileInfoToImage(ServerFileInfo info) {
+        Image image = new Image();
+        image.setCreateTime(info.getCreateTime() == null ? new Date() : info.getCreateTime());
+        //image.setFileId(info.getId() + "");
+        image.setName(info.getFileName());
+        image.setSize(info.getSize() + "");
+        image.setUrl(info.getUrl());
+        return image;
+    }
 
     private ImageDto convertToDto(Image image){
         if(image == null){
@@ -105,22 +123,6 @@ public class ImageBusinessImpl implements IImageBusiness {
             });
         }
         return dtos;
-    }
-
-
-    //校验
-    private Result checkUploadParams(MultipartFile[] files,Integer type){
-        if(type == null || type == 0){
-            return Result.initErrorResult(HttpStatusEnum.BAD_REQUEST, "Params error : type value is invalid!");
-        }
-        ImageTypeEnum ite = ImageTypeEnum.indexOf(type);
-        if(ite == null){
-            return Result.initErrorResult(HttpStatusEnum.BAD_REQUEST, "Params error : type value is invalid!");
-        }
-        if(files.length  == 0 ){
-            return Result.initErrorResult(HttpStatusEnum.BAD_REQUEST, "Params error : files is empty!");
-        }
-        return Result.initSuccessResult(null, null);
     }
 
 }
