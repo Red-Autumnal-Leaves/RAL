@@ -17,6 +17,8 @@ public class Query {
 	private Integer offset;
 	
 	private Integer rows;
+
+	private Boolean isPage = false;
 	
 	public Integer getPageNow() {
 		if(pageNow == null || pageNow <= 0){
@@ -90,6 +92,12 @@ public class Query {
 		int value =  this.total / this.pageSize;
 		this.pageCount = this.total % this.pageSize == 0  ? value : value + 1;
 	}
-	
-	
+
+	public Boolean getPage() {
+		return isPage;
+	}
+
+	public void setPage(Boolean page) {
+		isPage = page;
+	}
 }
