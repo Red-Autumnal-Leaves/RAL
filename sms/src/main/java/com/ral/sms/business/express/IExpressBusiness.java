@@ -20,6 +20,4 @@ public interface IExpressBusiness {
     Result save(HttpServletRequest request, String body, Manager manager);
 
     Result update(HttpServletRequest request,Long expressId, String body, Manager manager);
-
-    Result enable(HttpServletRequest request, Long expressId, Manager manager);
 }

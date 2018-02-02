@@ -48,10 +48,4 @@ public class ExpressController extends BaseController {
     public Result update(HttpServletRequest request,@PathVariable("expressId") Long expressId, @RequestBody String body){
         return expressBusiness.update(request,expressId,body,getUser());
     }
-
-    //禁用&开启
-    @RequestMapping(value = "/enable/{expressId}", method = RequestMethod.PUT)
-    public Result enable(HttpServletRequest request,@PathVariable("expressId") Long expressId){
-        return expressBusiness.enable(request,expressId,getUser());
-    }
 }

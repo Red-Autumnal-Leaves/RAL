@@ -1,5 +1,6 @@
 package com.ral.service.express;
 
+import com.ral.model.dto.express.ExpressDto;
 import com.ral.model.entity.express.Express;
 import com.ral.model.entity.express.ExpressExample;
 
@@ -19,6 +20,12 @@ public interface IExpressService {
     int save(Express express);
 
     int update(Express express);
+
+    List<ExpressDto> convertToDto(List<Express> expresses);
+
+    ExpressDto convertToDto(Express express);
+
+    int countByExpressName(String expressName);
 
 }
 
