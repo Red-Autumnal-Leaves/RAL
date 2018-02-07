@@ -64,7 +64,7 @@ public class MemberTypeBusinessImpl implements IMemberTypeBusiness {
     @Override
     public Result update(HttpServletRequest request,Long id, String body) {
         if(id == null || id == 0){
-            return Result.initErrorResult(HttpStatusEnum.BAD_REQUEST,"The 'id' cannot be empt");
+            return Result.initErrorResult(HttpStatusEnum.BAD_REQUEST,"The 'id' cannot be empty");
         }
         checkRequestBody(body);
         MemberType source = memberTypeService.selectById(id);

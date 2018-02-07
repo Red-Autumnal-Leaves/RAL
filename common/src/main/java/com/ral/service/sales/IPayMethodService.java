@@ -26,5 +26,7 @@ public interface IPayMethodService {
 
     int save(PayMethod method);
 
+    int updateSelective(PayMethod method);
+
     int update(PayMethod method);
 }

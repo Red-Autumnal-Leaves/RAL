@@ -62,6 +62,11 @@ public class PayMethodServiceImpl implements IPayMethodService {
 
     @Override
     public int update(PayMethod method) {
+        return payMethodMapper.updateByPrimaryKey(method);
+    }
+
+    @Override
+    public int updateSelective(PayMethod method) {
         return payMethodMapper.updateByPrimaryKeySelective(method);
     }
 }

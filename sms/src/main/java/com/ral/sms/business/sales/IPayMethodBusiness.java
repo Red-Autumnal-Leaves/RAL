@@ -1,5 +1,6 @@
 package com.ral.sms.business.sales;
 
+import com.ral.model.auth.res.Manager;
 import com.ral.model.query.sales.PayMethodQuery;
 import com.ral.model.res.Result;
 
@@ -16,8 +17,8 @@ public interface IPayMethodBusiness {
 
     Result detail(HttpServletRequest request, Long methodId);
 
-    Result update(HttpServletRequest request, Long methodId,String body);
+    Result update(HttpServletRequest request, Long methodId,String body, Manager manager);
 
-    Result save(HttpServletRequest request,String body);
+    Result save(HttpServletRequest request,String body, Manager manager);
 
 }
