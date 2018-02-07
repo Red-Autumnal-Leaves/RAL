@@ -3,13 +3,12 @@ package com.ral.model.entity.brand;
 import java.util.Date;
 
 public class Brand {
+
     private Long id;
 
     private String name;
 
     private Long logo;
-
-    private Long categoryId;
 
     private String createUser;
 
@@ -41,14 +40,6 @@ public class Brand {
 
     public void setLogo(Long logo) {
         this.logo = logo;
-    }
-
-    public Long getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(Long categoryId) {
-        this.categoryId = categoryId;
     }
 
     public String getCreateUser() {
