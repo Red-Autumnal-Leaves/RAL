@@ -47,7 +47,7 @@ public class ExpressBusinessImpl implements IExpressBusiness {
             }
         }
         List<Express> expresses = expressService.selectByExample(example);
-        return Result.initSuccessResult(expressService.convertToDto(expresses),null);
+        return Result.initSuccessResult(expressService.convertToDto(expresses),query);
     }
 
     @Override

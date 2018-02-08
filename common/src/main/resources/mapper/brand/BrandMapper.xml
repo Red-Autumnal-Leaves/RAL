@@ -5,7 +5,6 @@
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="logo" property="logo" jdbcType="BIGINT" />
-    <result column="category_id" property="categoryId" jdbcType="BIGINT" />
     <result column="create_user" property="createUser" jdbcType="VARCHAR" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="last_update_user" property="lastUpdateUser" jdbcType="VARCHAR" />
@@ -70,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, `name`, logo, category_id, create_user, create_time, last_update_user, last_update_time
+    id, `name`, logo, create_user, create_time, last_update_user, last_update_time
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ral.model.entity.brand.BrandExample" >
     select
@@ -104,11 +103,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.ral.model.entity.brand.Brand" >
-    insert into brand (id, `name`, logo, 
-      category_id, create_user, create_time, 
+    insert into brand (id, `name`, logo, create_user, create_time,
       last_update_user, last_update_time)
     values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{logo,jdbcType=BIGINT}, 
-      #{categoryId,jdbcType=BIGINT}, #{createUser,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{createUser,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
       #{lastUpdateUser,jdbcType=VARCHAR}, #{lastUpdateTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.ral.model.entity.brand.Brand" >
@@ -122,9 +120,6 @@
       </if>
       <if test="logo != null" >
         logo,
-      </if>
-      <if test="categoryId != null" >
-        category_id,
       </if>
       <if test="createUser != null" >
         create_user,
@@ -148,9 +143,6 @@
       </if>
       <if test="logo != null" >
         #{logo,jdbcType=BIGINT},
-      </if>
-      <if test="categoryId != null" >
-        #{categoryId,jdbcType=BIGINT},
       </if>
       <if test="createUser != null" >
         #{createUser,jdbcType=VARCHAR},
@@ -184,9 +176,6 @@
       <if test="record.logo != null" >
         logo = #{record.logo,jdbcType=BIGINT},
       </if>
-      <if test="record.categoryId != null" >
-        category_id = #{record.categoryId,jdbcType=BIGINT},
-      </if>
       <if test="record.createUser != null" >
         create_user = #{record.createUser,jdbcType=VARCHAR},
       </if>
@@ -209,7 +198,6 @@
     set id = #{record.id,jdbcType=BIGINT},
       `name` = #{record.name,jdbcType=VARCHAR},
       logo = #{record.logo,jdbcType=BIGINT},
-      category_id = #{record.categoryId,jdbcType=BIGINT},
       create_user = #{record.createUser,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       last_update_user = #{record.lastUpdateUser,jdbcType=VARCHAR},
@@ -226,9 +214,6 @@
       </if>
       <if test="logo != null" >
         logo = #{logo,jdbcType=BIGINT},
-      </if>
-      <if test="categoryId != null" >
-        category_id = #{categoryId,jdbcType=BIGINT},
       </if>
       <if test="createUser != null" >
         create_user = #{createUser,jdbcType=VARCHAR},
@@ -249,11 +234,62 @@
     update brand
     set `name` = #{name,jdbcType=VARCHAR},
       logo = #{logo,jdbcType=BIGINT},
-      category_id = #{categoryId,jdbcType=BIGINT},
       create_user = #{createUser,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       last_update_user = #{lastUpdateUser,jdbcType=VARCHAR},
       last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+  <!--自定义-->
+  <resultMap id="DtoResultMap" type="com.ral.model.dto.brand.BrandDto" extends="BaseResultMap">
+    <result column="logo_url" property="logoUrl" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <sql id="query_dto_column_list">
+    brand.id, brand.name, brand.logo,image.url logo_url, brand.create_user,
+    brand.create_time, brand.last_update_user, brand.last_update_time
+  </sql>
+
+  <sql id="query_dto_from_table_sql">
+    from brand LEFT JOIN image on image.id = brand.id
+  </sql>
+
+  <sql id="query_dto_where_sql">
+    <where>
+      <if test="name != null">
+        and brand.name like '%${name}%'
+      </if>
+      <if test="id != null">
+        and brand.id = #{id}
+      </if>
+    </where>
+    ORDER BY brand.create_time DESC
+  </sql>
+
+  <select id="query" resultMap="DtoResultMap" parameterType="com.ral.model.query.brand.BrandQuery">
+    SELECT
+    <include refid="query_dto_column_list"/>
+    FROM
+    <include refid="query_dto_from_table_sql"/>
+    <include refid="query_dto_where_sql" />
+    <if test="isPage">
+      LIMIT #{offset},#{rows}
+    </if>
+  </select>
+
+  <select id="queryCount" resultType="int" parameterType="com.ral.model.query.member.MemberQuery">
+    SELECT count(1) FROM
+    <include refid="query_dto_from_table_sql"/>
+    <include refid="query_dto_where_sql" />
+  </select>
+
+  <select id="selectDtoById" resultMap="DtoResultMap">
+    SELECT
+    <include refid="query_dto_column_list"/>
+    FROM
+    <include refid="query_dto_from_table_sql"/>
+    WHERE brand.id = #{brandId}
+  </select>
+
 </mapper>

@@ -1,7 +1,9 @@
 package com.ral.dao.brand;
 
+import com.ral.model.dto.brand.BrandDto;
 import com.ral.model.entity.brand.Brand;
 import com.ral.model.entity.brand.BrandExample;
+import com.ral.model.query.brand.BrandQuery;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -30,4 +32,12 @@ public interface BrandMapper {
     int updateByPrimaryKeySelective(Brand record);
 
     int updateByPrimaryKey(Brand record);
+
+    List<BrandDto> query(BrandQuery query);
+
+    int queryCount(BrandQuery query);
+
+    BrandDto selectDtoById(@Param("brandId")Long brandId);
+
+
 }
