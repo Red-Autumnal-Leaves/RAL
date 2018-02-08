@@ -1,9 +1,16 @@
-package com.ral.model.entity.item;
+package com.ral.model.dto.item;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.ral.util.date.DateUtils;
+
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class Item {
+/**
+ * Created by victor on 2018/2/8.
+ */
+public class ItemDto implements Serializable {
 
     private Long id;
 
@@ -15,13 +22,23 @@ public class Item {
 
     private Long supplierId;
 
+    private String supplierName;
+
     private Long categoryId;
+
+    private String categoryName;
 
     private Long catalogId;
 
+    private String catalogName;
+
     private Long brandId;
 
+    private String brandName;
+
     private Long imageId;
+
+    private String imageUrl;
 
     private BigDecimal price;
 
@@ -41,8 +58,6 @@ public class Item {
 
     private Date lastUpdateTime;
 
-    private Boolean isDisable;
-
     public Long getId() {
         return id;
     }
@@ -56,7 +71,7 @@ public class Item {
     }
 
     public void setItemCode(String itemCode) {
-        this.itemCode = itemCode == null ? null : itemCode.trim();
+        this.itemCode = itemCode;
     }
 
     public String getName() {
@@ -64,7 +79,7 @@ public class Item {
     }
 
     public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+        this.name = name;
     }
 
     public String getShortTitle() {
@@ -72,7 +87,7 @@ public class Item {
     }
 
     public void setShortTitle(String shortTitle) {
-        this.shortTitle = shortTitle == null ? null : shortTitle.trim();
+        this.shortTitle = shortTitle;
     }
 
     public Long getSupplierId() {
@@ -128,7 +143,7 @@ public class Item {
     }
 
     public void setUnit(String unit) {
-        this.unit = unit == null ? null : unit.trim();
+        this.unit = unit;
     }
 
     public String getKeywords() {
@@ -136,15 +151,15 @@ public class Item {
     }
 
     public void setKeywords(String keywords) {
-        this.keywords = keywords == null ? null : keywords.trim();
+        this.keywords = keywords;
     }
 
-    public Boolean getIsVirtual() {
+    public Boolean getVirtual() {
         return isVirtual;
     }
 
-    public void setIsVirtual(Boolean isVirtual) {
-        this.isVirtual = isVirtual;
+    public void setVirtual(Boolean virtual) {
+        isVirtual = virtual;
     }
 
     public String getSellerNote() {
@@ -152,7 +167,7 @@ public class Item {
     }
 
     public void setSellerNote(String sellerNote) {
-        this.sellerNote = sellerNote == null ? null : sellerNote.trim();
+        this.sellerNote = sellerNote;
     }
 
     public String getCreateUser() {
@@ -160,9 +175,10 @@ public class Item {
     }
 
     public void setCreateUser(String createUser) {
-        this.createUser = createUser == null ? null : createUser.trim();
+        this.createUser = createUser;
     }
 
+    @JsonFormat(pattern = DateUtils.YYYY_MM_DD_HH_MM_SS)
     public Date getCreateTime() {
         return createTime;
     }
@@ -176,9 +192,10 @@ public class Item {
     }
 
     public void setLastUpdateUser(String lastUpdateUser) {
-        this.lastUpdateUser = lastUpdateUser == null ? null : lastUpdateUser.trim();
+        this.lastUpdateUser = lastUpdateUser;
     }
 
+    @JsonFormat(pattern = DateUtils.YYYY_MM_DD_HH_MM_SS)
     public Date getLastUpdateTime() {
         return lastUpdateTime;
     }
@@ -187,11 +204,43 @@ public class Item {
         this.lastUpdateTime = lastUpdateTime;
     }
 
-    public Boolean getIsDisable() {
-        return isDisable;
+    public String getSupplierName() {
+        return supplierName;
     }
 
-    public void setIsDisable(Boolean isDisable) {
-        this.isDisable = isDisable;
+    public void setSupplierName(String supplierName) {
+        this.supplierName = supplierName;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
+    public String getCatalogName() {
+        return catalogName;
+    }
+
+    public void setCatalogName(String catalogName) {
+        this.catalogName = catalogName;
+    }
+
+    public String getBrandName() {
+        return brandName;
+    }
+
+    public void setBrandName(String brandName) {
+        this.brandName = brandName;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

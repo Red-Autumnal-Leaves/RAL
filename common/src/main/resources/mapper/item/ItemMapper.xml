@@ -431,4 +431,113 @@
       is_disable = #{isDisable,jdbcType=BIT}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+
+
+  <resultMap id="DtoResultMap" type="com.ral.model.dto.item.ItemDto" extends="BaseResultMap">
+    <result column="image_url" property="imageUrl" jdbcType="VARCHAR" />
+    <result column="catalog_name" property="catalogName" jdbcType="VARCHAR" />
+    <result column="category_name" property="categoryName" jdbcType="VARCHAR" />
+    <result column="brand_name" property="brandName" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <sql id="query_dto_column_list">
+      item.id, item.item_code, item.name, item.short_title,
+      item.supplier_id, item.category_id, item.catalog_id,
+      item.brand_id, item.image_id, item.price, item.unit,
+      item.keywords, item.is_virtual, item.seller_note,
+      item.create_user, item.create_time, item.last_update_user, item.last_update_time,
+      image.url as 'image_url',
+      catalog.name as 'catalog_name',
+      category.name as 'category_name',
+      brand.name as 'brand_name'
+  </sql>
+
+  <sql id="query_dto_from_table_sql">
+      from item
+      LEFT JOIN image on item.image_id = image.id
+      LEFT JOIN catalog on catalog.id = item.catalog_id
+      LEFT JOIN category on category.id = item.category_id
+      LEFT JOIN brand on item.brand_id = brand.id
+  </sql>
+
+  <sql id="query_dto_where_sql">
+    <where>
+      item.is_disable = FALSE
+      <if test="itemCode != null">
+        and item.item_code = #{itemCode,jdbcType=VARCHAR}
+      </if>
+      <if test="name != null">
+        and item.`name` = #{name,jdbcType=VARCHAR}
+      </if>
+      <if test="shortTitle != null">
+        and item.`short_title` = #{shortTitle,jdbcType=VARCHAR}
+      </if>
+      <if test="supplierId != null">
+        and item.supplier_id = #{supplierId,jdbcType=BIGINT}
+      </if>
+      <if test="categoryId != null">
+        and item.category_id = #{categoryId,jdbcType=BIGINT}
+      </if>
+      <if test="catalogId != null">
+        and item.`catalog_id` = #{catalogId,jdbcType=BIGINT}
+      </if>
+      <if test="brandId != null">
+        and item.`brand_id` = #{brandId,jdbcType=BIGINT}
+      </if>
+      <if test="keywords != null">
+        and item.`keywords` = #{keywords,jdbcType=VARCHAR}
+      </if>
+      <if test="isVirtual != null">
+        and item.`is_virtual` = #{isVirtual,jdbcType=BIT}
+      </if>
+      <if test="sellerNote != null">
+        and item.`seller_note` = #{sellerNote,jdbcType=VARCHAR}
+      </if>
+    </where>
+    ORDER BY item.create_time DESC
+  </sql>
+
+
+
+  <select id="query" resultMap="DtoResultMap" parameterType="com.ral.model.query.item.ItemQuery">
+    SELECT
+    <include refid="query_dto_column_list"/>
+    FROM
+    <include refid="query_dto_from_table_sql"/>
+    <include refid="query_dto_where_sql" />
+    <if test="isPage">
+      LIMIT #{offset},#{rows}
+    </if>
+  </select>
+
+
+  <select id="queryCount" resultType="int" parameterType="com.ral.model.query.item.ItemQuery">
+    SELECT count(1) FROM
+    <include refid="query_dto_from_table_sql"/>
+    <include refid="query_dto_where_sql" />
+  </select>
+
+  <select id="queryCount" resultType="int" parameterType="com.ral.model.query.item.ItemQuery">
+    SELECT count(1) FROM
+    <include refid="query_dto_from_table_sql"/>
+    <include refid="query_dto_where_sql" />
+  </select>
+
+  <select id="selectDtoById" resultMap="DtoResultMap">
+    SELECT
+    <include refid="query_dto_column_list"/>
+    FROM
+    <include refid="query_dto_from_table_sql"/>
+    WHERE item.is_disable = false and item.id = #{id}
+  </select>
+
+  <select id="selectDtoByItemCode" resultMap="DtoResultMap">
+    SELECT
+    <include refid="query_dto_column_list"/>
+    FROM
+    <include refid="query_dto_from_table_sql"/>
+    WHERE item.is_disable = false and item.item_code = #{itemCode}
+  </select>
+
 </mapper>

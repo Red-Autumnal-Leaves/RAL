@@ -3,6 +3,7 @@ package com.ral.sms.web.controller.spec;
 import com.ral.model.query.spec.SpecQuery;
 import com.ral.model.res.Result;
 import com.ral.sms.business.spec.ISpecBusiness;
+import com.ral.sms.web.controller.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 @RestController
 @RequestMapping("/spec/*")
-public class SpecController {
+public class SpecController extends BaseController{
 
     @Autowired
     private ISpecBusiness specBusiness;
@@ -35,22 +36,22 @@ public class SpecController {
 
     @RequestMapping(value = "/delete/{specId}",method = RequestMethod.DELETE)
     public Result delete(HttpServletRequest request, @PathVariable("specId") Long specId){
-        return null;
+        return specBusiness.detail(request,specId);
     }
 
     @RequestMapping(value = "/update/specId}",method = RequestMethod.PUT)
     public Result update(HttpServletRequest request, @PathVariable("specId") Long specId,@RequestBody  String body){
-        return null;
+        return specBusiness.update(request,specId,body,getUser());
     }
 
     @RequestMapping(value = "/save/{categoryId}",method = RequestMethod.POST)
     public Result save(HttpServletRequest request,@PathVariable("categoryId") Long categoryId,  @RequestBody  String body){
-        return null;
+        return specBusiness.save(request,categoryId,body,getUser());
     }
 
     @RequestMapping(value = "/remove/{specId}/value/{valueId}",method = RequestMethod.DELETE)
     public Result removeValue(HttpServletRequest request, @PathVariable("specId") Long specId,@PathVariable("valueId") Long valueId){
-        return null;
+        return specBusiness.removeValue(request,specId,valueId);
     }
 
 }

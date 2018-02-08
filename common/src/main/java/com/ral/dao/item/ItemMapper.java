@@ -2,8 +2,10 @@ package com.ral.dao.item;
 
 import java.util.List;
 
+import com.ral.model.dto.item.ItemDto;
 import com.ral.model.entity.item.Item;
 import com.ral.model.entity.item.ItemExample;
+import com.ral.model.query.item.ItemQuery;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -31,4 +33,13 @@ public interface ItemMapper {
     int updateByPrimaryKeySelective(Item record);
 
     int updateByPrimaryKey(Item record);
+
+    List<ItemDto> query(ItemQuery query);
+
+    int queryCount(ItemQuery query);
+
+    ItemDto selectDtoById(@Param("id")Long id);
+
+    ItemDto selectDtoByItemCode(@Param("itemCode")String itemCode);
+
 }
