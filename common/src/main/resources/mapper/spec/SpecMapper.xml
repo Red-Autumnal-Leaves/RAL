@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ral.dao.spec.SpecMapper" >
+  <cache eviction="FIFO" type="com.ral.config.MybatisRedisCache" flushInterval="60000" size="512" readOnly="true"  />
+
   <resultMap id="BaseResultMap" type="com.ral.model.entity.spec.Spec" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="category_id" property="categoryId" jdbcType="BIGINT" />
@@ -194,4 +196,34 @@
       `alias` = #{alias,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+  <sql id="query_dto_where_sql">
+    <where>
+      <if test="categoryId != null">
+        and category_id =  #{categoryId,jdbcType=BIGINT}
+      </if>
+      <if test="name != null">
+        and `name` like '%${name}%'
+      </if>
+      <if test="name != null">
+        and `alias`= #{alias,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </sql>
+
+  <select id="query" resultMap="BaseResultMap" parameterType="com.ral.model.query.spec.SpecQuery">
+    SELECT
+      <include refid="Base_Column_List"/>
+    FROM spec
+    <include refid="query_dto_where_sql" />
+    <if test="isPage">
+      LIMIT #{offset},#{rows};
+    </if>
+  </select>
+
+  <select id="queryCount" resultType="int" parameterType="com.ral.model.query.spec.SpecQuery">
+    SELECT count(1) FROM spec
+    <include refid="query_dto_where_sql" />
+  </select>
+
 </mapper>

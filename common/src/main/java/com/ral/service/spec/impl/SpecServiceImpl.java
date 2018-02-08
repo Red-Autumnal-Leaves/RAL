@@ -56,7 +56,14 @@ public class SpecServiceImpl implements ISpecService{
     public List<Spec> selectByCategoryId(Long categoryId) {
         SpecExample example = new SpecExample();
         example.createCriteria().andCategoryIdEqualTo(categoryId);
-        return selectByExample(example);
+        List<Spec> specs = selectByExample(example);
+        return specs == null ? new ArrayList<>() : specs;
+    }
+
+    @Override
+    public List<SpecDto> selectDtoByCategoryId(Long categoryId) {
+        List<Spec> specs = selectByCategoryId(categoryId);
+        return convertToDto(specs);
     }
 
     @Override
@@ -134,12 +141,18 @@ public class SpecServiceImpl implements ISpecService{
 
     @Override
     public List<SpecDto> query(SpecQuery query) {
-        return null;
+        List<Spec> specs = specMapper.query(query);
+        return convertToDto(specs);
+    }
+
+    @Override
+    public int queryCount(SpecQuery query) {
+        return specMapper.queryCount(query);
     }
 
     @Override
     public SpecDto selectDtoById(Long specId) {
-        return null;
+        return convertToDto(selectById(specId));
     }
 
 
@@ -163,6 +176,30 @@ public class SpecServiceImpl implements ISpecService{
             return new ArrayList<>();
         }
         return map.get(specId);
+    }
+
+    private List<SpecDto> convertToDto(List<Spec> specs){
+        List<SpecDto> dtos = new ArrayList<>();
+        if(!specs.isEmpty()){
+            List<Long> specIds = specs.stream().map(v -> v.getId()).distinct().collect(Collectors.toList());
+            Map<Long,List<SpecValue>> valueMap = getValuesGroupBySpecs(specIds);
+            specs.forEach(spec -> {
+                SpecDto dto = new SpecDto();
+                BeanUtils.copyProperties(spec,dto);
+                dto.setValues(valueMap.get(spec.getId()));
+                dtos.add(dto);
+            });
+        }
+        return dtos;
+    }
+
+    private SpecDto convertToDto(Spec spec){
+        if(spec == null) {return null;}
+        List<SpecDto> dtos = convertToDto(Lists.newArrayList(spec));
+        if(!dtos.isEmpty()){
+            return dtos.get(0);
+        }
+        return null;
     }
 
     private void removeSpecValue(List<Long> valueIds){

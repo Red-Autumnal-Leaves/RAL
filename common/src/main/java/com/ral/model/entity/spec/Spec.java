@@ -1,6 +1,8 @@
 package com.ral.model.entity.spec;
 
-public class Spec {
+import java.io.Serializable;
+
+public class Spec implements Serializable{
 
     private Long id;
 

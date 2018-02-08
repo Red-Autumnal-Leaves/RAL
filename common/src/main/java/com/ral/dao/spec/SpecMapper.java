@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.ral.model.entity.spec.Spec;
 import com.ral.model.entity.spec.SpecExample;
+import com.ral.model.query.spec.SpecQuery;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -31,4 +32,8 @@ public interface SpecMapper {
     int updateByPrimaryKeySelective(Spec record);
 
     int updateByPrimaryKey(Spec record);
+
+    List<Spec> query(SpecQuery query);
+
+    int queryCount(SpecQuery query);
 }

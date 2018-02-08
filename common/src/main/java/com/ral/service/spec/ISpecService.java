@@ -20,6 +20,8 @@ public interface ISpecService {
 
     List<Spec> selectByCategoryId(Long categoryId);
 
+    List<SpecDto> selectDtoByCategoryId(Long categoryId);
+
     int insert(Spec spec);
 
     boolean insert(SpecDto spec);
@@ -31,6 +33,8 @@ public interface ISpecService {
     int delete(Long specId);
 
     List<SpecDto> query(SpecQuery query);
+
+    int queryCount(SpecQuery query);
 
     SpecDto selectDtoById(Long specId);
 }

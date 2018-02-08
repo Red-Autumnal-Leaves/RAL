@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ral.dao.spec.SpecValueMapper" >
+
+  <cache eviction="FIFO" type="com.ral.config.MybatisRedisCache" flushInterval="60000" size="512" readOnly="true"  />
+
   <resultMap id="BaseResultMap" type="com.ral.model.entity.spec.SpecValue" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="spec_id" property="specId" jdbcType="BIGINT" />
@@ -196,12 +199,12 @@
   </update>
 
   <insert id="batchInsert">
-    INSERT INTO spec_value(spec_id, value, alias) VALUES
+    INSERT INTO spec_value(spec_id, value,alias) VALUES
     <foreach collection="values" separator="," item="item">
       (#{item.specId,jdbcType=BIGINT},#{item.value,jdbcType=VARCHAR},#{item.alias,jdbcType=VARCHAR})
     </foreach>
   </insert>
-  <update id="batchInsert">
+  <update id="batchUpdate">
     <foreach collection="values" item="item" index="index" open="" close="" separator=";">
       UPDATE spec_value
       <set>

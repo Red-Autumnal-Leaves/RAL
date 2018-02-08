@@ -2,6 +2,8 @@ package com.ral.sms.web.controller.spec;
 
 import com.ral.model.query.spec.SpecQuery;
 import com.ral.model.res.Result;
+import com.ral.sms.business.spec.ISpecBusiness;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,19 +15,22 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping("/spec/*")
 public class SpecController {
 
+    @Autowired
+    private ISpecBusiness specBusiness;
+
     @RequestMapping(value = "/query",method = RequestMethod.GET)
     public Result query(HttpServletRequest request, SpecQuery query){
-        return null;
+        return specBusiness.query(request,query);
     }
 
     @RequestMapping(value = "/query/{categoryId}",method = RequestMethod.GET)
     public Result queryByCategory(HttpServletRequest request,@PathVariable("categoryId") Long categoryId){
-        return null;
+        return specBusiness.query(request,categoryId);
     }
 
     @RequestMapping(value = "/detail/{specId}",method = RequestMethod.GET)
     public Result detail(HttpServletRequest request, @PathVariable("specId") Long specId){
-        return null;
+        return specBusiness.detail(request,specId);
     }
 
     @RequestMapping(value = "/delete/{specId}",method = RequestMethod.DELETE)
@@ -38,8 +43,8 @@ public class SpecController {
         return null;
     }
 
-    @RequestMapping(value = "/save",method = RequestMethod.POST)
-    public Result save(HttpServletRequest request,  @RequestBody  String body){
+    @RequestMapping(value = "/save/{categoryId}",method = RequestMethod.POST)
+    public Result save(HttpServletRequest request,@PathVariable("categoryId") Long categoryId,  @RequestBody  String body){
         return null;
     }
 
