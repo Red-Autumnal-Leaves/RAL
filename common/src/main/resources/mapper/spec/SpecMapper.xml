@@ -99,13 +99,13 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.ral.model.entity.spec.Spec" >
+  <insert id="insert" parameterType="com.ral.model.entity.spec.Spec" useGeneratedKeys="true" keyProperty="id">
     insert into spec (id, category_id, `name`, 
       `alias`)
     values (#{id,jdbcType=BIGINT}, #{categoryId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, 
       #{alias,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.ral.model.entity.spec.Spec" >
+  <insert id="insertSelective" parameterType="com.ral.model.entity.spec.Spec" useGeneratedKeys="true" keyProperty="id" >
     insert into spec
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >

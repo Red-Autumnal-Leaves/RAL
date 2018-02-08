@@ -31,4 +31,8 @@ public interface SpecValueMapper {
     int updateByPrimaryKeySelective(SpecValue record);
 
     int updateByPrimaryKey(SpecValue record);
+
+    int batchInsert(@Param("values") List<SpecValue> values);
+
+    int batchUpdate(@Param("values") List<SpecValue> values);
 }

@@ -1,6 +1,7 @@
 package com.ral.model.entity.spec;
 
 public class SpecValue {
+
     private Long id;
 
     private Long specId;

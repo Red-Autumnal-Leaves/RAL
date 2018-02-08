@@ -1,22 +1,19 @@
-package com.ral.model.entity.spec;
+package com.ral.model.query.spec;
 
-public class Spec {
+import com.ral.model.query.Query;
 
-    private Long id;
+import java.io.Serializable;
+
+/**
+ * Created by victor on 2018/2/8.
+ */
+public class SpecQuery extends Query implements Serializable {
 
     private Long categoryId;
 
     private String name;
 
     private String alias;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public Long getCategoryId() {
         return categoryId;
@@ -31,7 +28,7 @@ public class Spec {
     }
 
     public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+        this.name = name;
     }
 
     public String getAlias() {
@@ -39,6 +36,6 @@ public class Spec {
     }
 
     public void setAlias(String alias) {
-        this.alias = alias == null ? null : alias.trim();
+        this.alias = alias;
     }
 }

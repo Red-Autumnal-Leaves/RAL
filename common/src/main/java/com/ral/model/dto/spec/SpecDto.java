@@ -1,6 +1,15 @@
-package com.ral.model.entity.spec;
+package com.ral.model.dto.spec;
 
-public class Spec {
+import com.ral.model.entity.spec.SpecValue;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Created by victor on 2018/2/8.
+ */
+public class SpecDto implements Serializable {
 
     private Long id;
 
@@ -9,6 +18,8 @@ public class Spec {
     private String name;
 
     private String alias;
+
+    private List<SpecValue> values = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -31,7 +42,7 @@ public class Spec {
     }
 
     public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+        this.name = name;
     }
 
     public String getAlias() {
@@ -39,6 +50,14 @@ public class Spec {
     }
 
     public void setAlias(String alias) {
-        this.alias = alias == null ? null : alias.trim();
+        this.alias = alias;
+    }
+
+    public List<SpecValue> getValues() {
+        return values;
+    }
+
+    public void setValues(List<SpecValue> values) {
+        this.values = values;
     }
 }

@@ -194,4 +194,28 @@
       `alias` = #{alias,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+  <insert id="batchInsert">
+    INSERT INTO spec_value(spec_id, value, alias) VALUES
+    <foreach collection="values" separator="," item="item">
+      (#{item.specId,jdbcType=BIGINT},#{item.value,jdbcType=VARCHAR},#{item.alias,jdbcType=VARCHAR})
+    </foreach>
+  </insert>
+  <update id="batchInsert">
+    <foreach collection="values" item="item" index="index" open="" close="" separator=";">
+      UPDATE spec_value
+      <set>
+        <if test="specId != null" >
+          spec_id = #{item.specId,jdbcType=BIGINT},
+        </if>
+        <if test="value != null" >
+          `value` = #{item.value,jdbcType=VARCHAR},
+        </if>
+        <if test="alias != null" >
+          `alias` = #{item.alias,jdbcType=VARCHAR},
+        </if>
+      </set>
+      WHERE id = #{item.id,jdbcType=BIGINT}
+    </foreach>
+  </update>
 </mapper>
