@@ -1,5 +1,6 @@
 package com.ral.sms.business.spec;
 
+import com.ral.model.auth.res.Manager;
 import com.ral.model.query.spec.SpecQuery;
 import com.ral.model.res.Result;
 
@@ -16,9 +17,9 @@ public interface ISpecBusiness {
 
     Result detail(HttpServletRequest request,Long specId);
 
-    Result save(HttpServletRequest request,Long categoryId,String body);
+    Result save(HttpServletRequest request, Long categoryId, String body, Manager manager);
 
-    Result update(HttpServletRequest request,Long specId,String body);
+    Result update(HttpServletRequest request,Long specId,String body, Manager manager);
 
     Result delete(HttpServletRequest request,Long specId);
 

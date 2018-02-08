@@ -136,7 +136,11 @@ public class SpecServiceImpl implements ISpecService{
 
     @Override
     public int delete(Long specId) {
-        return specMapper.deleteByPrimaryKey(specId);
+        int res = specMapper.deleteByPrimaryKey(specId);
+        SpecValueExample example = new SpecValueExample();
+        example.createCriteria().andSpecIdEqualTo(specId);
+        res += specValueMapper.deleteByExample(example);
+        return res;
     }
 
     @Override
@@ -155,6 +159,10 @@ public class SpecServiceImpl implements ISpecService{
         return convertToDto(selectById(specId));
     }
 
+    @Override
+    public int removeValue(Long specId, Long valueId) {
+        return specValueMapper.deleteByPrimaryKey(valueId);
+    }
 
     private Map<Long,List<SpecValue>> getValuesGroupBySpecs(List<Long> specIds){
         if(specIds == null || specIds.isEmpty()){

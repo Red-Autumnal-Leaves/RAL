@@ -37,4 +37,6 @@ public interface ISpecService {
     int queryCount(SpecQuery query);
 
     SpecDto selectDtoById(Long specId);
+
+    int removeValue(Long specId,Long valueId);
 }
