@@ -209,4 +209,43 @@
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+
+  <resultMap id="DtoResultMap" type="com.ral.model.dto.item.ItemImageDto" extends="BaseResultMap">
+    <result column="url" property="url" jdbcType="VARCHAR" />
+  </resultMap>
+
+
+  <sql id="query_dto_column_list">
+    item_image.id,
+    item_image.item_code,
+    item_image.image_id,
+    image.url
+  </sql>
+
+
+  <sql id="query_dto_from_table_sql">
+    item_image INNER JOIN image on image.id = item_image.image_id
+  </sql>
+
+  <select id="selectDtosByItemCodes" resultMap="DtoResultMap">
+    SELECT
+     <include refid="query_dto_column_list"/>
+     FROM
+    <include refid="query_dto_from_table_sql"/>
+    WHERE item_image.item_code IN
+    <foreach collection="itemCodes" item="itemCode" open="(" close=")" separator="," >
+      #{itemCode,jdbcType=VARCHAR}
+    </foreach>
+  </select>
+
+  <insert id="batchInsert" >
+      insert into item_image (item_code, image_id,create_user)
+    values
+    <foreach collection="images" separator="," item="item">
+      (#{itemCode,jdbcType=VARCHAR}, #{imageId,jdbcType=BIGINT},#{createUser,jdbcType=VARCHAR})
+    </foreach>
+  </insert>
+
+
 </mapper>

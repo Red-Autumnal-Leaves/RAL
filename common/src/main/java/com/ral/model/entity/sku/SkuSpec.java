@@ -1,11 +1,16 @@
 package com.ral.model.entity.sku;
 
+import com.ral.model.entity.spec.Spec;
+import com.ral.model.entity.spec.SpecValue;
+
 public class SkuSpec {
+
     private Long id;
 
     private String skuCode;
 
     private Long specValueId;
+
 
     public Long getId() {
         return id;
@@ -30,4 +35,6 @@ public class SkuSpec {
     public void setSpecValueId(Long specValueId) {
         this.specValueId = specValueId;
     }
+
+
 }

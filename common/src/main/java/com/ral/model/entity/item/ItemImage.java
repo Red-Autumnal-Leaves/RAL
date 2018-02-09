@@ -3,6 +3,7 @@ package com.ral.model.entity.item;
 import java.util.Date;
 
 public class ItemImage {
+
     private Long id;
 
     private String itemCode;

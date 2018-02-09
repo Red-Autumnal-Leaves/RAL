@@ -454,7 +454,7 @@
   </sql>
 
   <sql id="query_dto_from_table_sql">
-      from item
+      item
       LEFT JOIN image on item.image_id = image.id
       LEFT JOIN catalog on catalog.id = item.catalog_id
       LEFT JOIN category on category.id = item.category_id
@@ -498,8 +498,6 @@
     ORDER BY item.create_time DESC
   </sql>
 
-
-
   <select id="query" resultMap="DtoResultMap" parameterType="com.ral.model.query.item.ItemQuery">
     SELECT
     <include refid="query_dto_column_list"/>
@@ -509,13 +507,6 @@
     <if test="isPage">
       LIMIT #{offset},#{rows}
     </if>
-  </select>
-
-
-  <select id="queryCount" resultType="int" parameterType="com.ral.model.query.item.ItemQuery">
-    SELECT count(1) FROM
-    <include refid="query_dto_from_table_sql"/>
-    <include refid="query_dto_where_sql" />
   </select>
 
   <select id="queryCount" resultType="int" parameterType="com.ral.model.query.item.ItemQuery">

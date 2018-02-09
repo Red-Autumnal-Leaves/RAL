@@ -2,8 +2,10 @@ package com.ral.dao.sku;
 
 import java.util.List;
 
+import com.ral.model.dto.sku.SkuDto;
 import com.ral.model.entity.sku.Sku;
 import com.ral.model.entity.sku.SkuExample;
+import com.ral.model.query.sku.SkuQuery;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -31,4 +33,11 @@ public interface SkuMapper {
     int updateByPrimaryKeySelective(Sku record);
 
     int updateByPrimaryKey(Sku record);
+
+    List<SkuDto> query(SkuQuery query);
+
+    int queryCount(SkuQuery query);
+
+    List<SkuDto> selectDtoByItemCodes(@Param("itemCodes")List<String> itemCodes);
+
 }

@@ -2,6 +2,7 @@ package com.ral.dao.item;
 
 import java.util.List;
 
+import com.ral.model.dto.item.ItemImageDto;
 import com.ral.model.entity.item.ItemImage;
 import com.ral.model.entity.item.ItemImageExample;
 import org.apache.ibatis.annotations.Param;
@@ -31,4 +32,9 @@ public interface ItemImageMapper {
     int updateByPrimaryKeySelective(ItemImage record);
 
     int updateByPrimaryKey(ItemImage record);
+
+    int batchInsert(List<ItemImage> images);
+
+    List<ItemImageDto> selectDtosByItemCodes(@Param("itemCodes")List<String> itemCodes);
+
 }

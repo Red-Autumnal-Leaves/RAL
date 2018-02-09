@@ -368,4 +368,84 @@
       is_disable = #{isDisable,jdbcType=BIT}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+
+  <resultMap id="DtoResultMap" type="com.ral.model.dto.sku.SkuDto" extends="BaseResultMap">
+    <result column="category_name" property="categoryName" jdbcType="VARCHAR" />
+    <result column="catalog_name" property="catalogName" jdbcType="VARCHAR" />
+    <result column="image_url" property="imageUrl" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <sql id="query_dto_column_list">
+    sku.id,sku.sku_code,sku.item_code,sku.category_id,
+    sku.catalog_id, sku.barcode, sku.price, sku.market_price, sku.image, sku.status,
+     sku.create_user, sku.create_time, sku.last_update_user, sku.last_update_time,
+    image.url as 'image_url',
+    catalog.name as 'catalog_name',
+    category.name as 'category_name',
+    brand.name as 'brand_name'
+  </sql>
+
+  <sql id="query_dto_from_table_sql">
+    sku
+    INNER JOIN item on item.item_code = sku.item_code
+    LEFT JOIN image on sku.image = image.id
+    LEFT JOIN catalog on catalog.id = sku.catalog_id
+    LEFT JOIN category on category.id = sku.category_id
+    LEFT JOIN brand on item.brand_id = brand.id
+  </sql>
+
+
+  <sql id="query_dto_where_sql">
+    <where>
+      sku.is_disable = FALSE
+      <if test="skuCode != null">
+        and sku.sku_code = #{skuCode,jdbcType=VARCHAR}
+      </if>
+      <if test="itemCode != null">
+        and sku.item_code = #{itemCode,jdbcType=VARCHAR}
+      </if>
+      <if test="categoryId != null">
+        and sku.`category_id` = #{categoryId,jdbcType=BIGINT}
+      </if>
+      <if test="catalogId != null">
+        and sku.`catalog_id` = #{catalogId,jdbcType=BIGINT}
+      </if>
+      <if test="barcode != null">
+        and sku.`barcode` = #{barcode,jdbcType=VARCHAR}
+      </if>
+      <if test="status != null">
+        and sku.`status` = #{status,jdbcType=INTEGER}
+      </if>
+    </where>
+  </sql>
+
+  <select id="query" resultMap="DtoResultMap" parameterType="com.ral.model.query.sku.SkuQuery">
+    SELECT
+    <include refid="query_dto_column_list"/>
+    FROM
+    <include refid="query_dto_from_table_sql"/>
+    <include refid="query_dto_where_sql" />
+    <if test="isPage">
+      LIMIT #{offset},#{rows}
+    </if>
+  </select>
+
+  <select id="queryCount" resultType="int" >
+    SELECT count(1) FROM
+    <include refid="query_dto_from_table_sql"/>
+    <include refid="query_dto_where_sql" />
+  </select>
+  
+  <select id="selectDtoByItemCodes" resultMap="DtoResultMap" >
+    SELECT
+    <include refid="query_dto_column_list"/>
+    FROM
+    <include refid="query_dto_from_table_sql"/>
+    WHERE sku.item_code IN
+    <foreach collection="itemCodes" item="item" open="(" close=")" separator="," >
+      #{item,jdbcType=VARCHAR}
+    </foreach>
+  </select>
+
 </mapper>
