@@ -62,7 +62,7 @@ public class SkuServiceImpl implements ISkuService{
     }
 
     @Override
-    public List<Sku> selectByItemCode(List<String> itemCodes) {
+    public List<Sku> selectByItemCodes(List<String> itemCodes) {
         SkuExample example = new SkuExample();
         example.createCriteria().andItemCodeIn(itemCodes).andIsDisableEqualTo(false);
         return selectByExample(example);

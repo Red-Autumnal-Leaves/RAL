@@ -94,6 +94,6 @@ public class ItemSpecServiceImpl implements ItemSpecService {
      */
     @Override
     public int selectActiveByItemCodeAndSpecId(String itemCode, Long specId) {
-        return 0;
+        return itemSpecMapper.selectActiveByItemCodeAndSpecId(itemCode,specId);
     }
 }

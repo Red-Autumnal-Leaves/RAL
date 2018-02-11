@@ -12,10 +12,10 @@ import com.ral.model.enums.IndexedEnumUtil;
 public enum IdTypeEnums implements IndexedEnum<IdTypeEnums> {
 
     DEFAULT(1,"默认",""),
-    ITEM(2,"商品",""),
+    ITEM(2,"商品","P"),
     SKU(3,"SKU",""),
     BARCODE(4,"条码",""),
-    ORDER(5,"订单","SO"),
+    ORDER(5,"订单","O"),
     REQUEST(6,"HTTP 请求",""),
     ;
 

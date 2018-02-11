@@ -3,11 +3,9 @@ package com.ral.sms.web.controller.item;
 import com.ral.model.query.item.ItemQuery;
 import com.ral.model.res.Result;
 import com.ral.sms.business.item.ItemBusiness;
+import com.ral.sms.web.controller.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -16,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 @RestController
 @RequestMapping("/item/*")
-public class ItemController {
+public class ItemController extends BaseController{
 
     @Autowired
     private ItemBusiness itemBusiness;
@@ -43,6 +41,32 @@ public class ItemController {
         return itemBusiness.detail(request,itemCode);
     }
 
+
+    /**
+     * 创建保存
+     * @param request
+     * @param body
+     * @return
+     */
+    @RequestMapping(value =  "/save",method = RequestMethod.POST)
+    public Result save(HttpServletRequest request,@RequestBody  String body){
+        return itemBusiness.save(request,body,getUser());
+    }
+
+    /**
+     * 更新商品
+     * @param request
+     * @param itemCode
+     * @param body
+     * @return
+     */
+    @RequestMapping(value =  "/update/{itemCode}",method = RequestMethod.PUT)
+    public Result update(HttpServletRequest request ,@PathVariable("itemCode") String itemCode,  @RequestBody String body){
+        return itemBusiness.update(request,itemCode,body,getUser());
+    }
+
+
+
     /**
      * 查询商品的规格
      * @param request
@@ -65,6 +89,20 @@ public class ItemController {
         return itemBusiness.skus(request,itemCode);
     }
 
+
+
+    /**
+     * 移除商品规格关联
+     * @param request
+     * @param itemCode
+     * @return
+     */
+    @RequestMapping(value = "/remove/{itemCode}/spec/{specId}",method = RequestMethod.DELETE)
+    public Result removeSpec(HttpServletRequest request,@PathVariable("itemCode")String itemCode,@PathVariable("specId")Long specId){
+        return itemBusiness.removeSpec(request,itemCode,specId);
+    }
+
+
     /**
      * 移除商品规格关联
      * @param request
@@ -72,9 +110,9 @@ public class ItemController {
      * @param specId
      * @return
      */
-    @RequestMapping("/remove/{itemCode}/spec/{specId}")
-    public Result removeSpec(HttpServletRequest request,@PathVariable("itemCode")String itemCode,@PathVariable("specId")Long specId){
-        return itemBusiness.removeSpec(request,itemCode,specId);
+    @RequestMapping(value = "/add/{itemCode}/spec/{specId}",method = RequestMethod.DELETE)
+    public Result addSpec(HttpServletRequest request,@PathVariable("itemCode")String itemCode,@PathVariable("specId")Long specId){
+        return itemBusiness.addSpec(request,itemCode,specId);
     }
 
 

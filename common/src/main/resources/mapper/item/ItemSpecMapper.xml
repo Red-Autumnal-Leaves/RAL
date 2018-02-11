@@ -279,4 +279,11 @@
         INNER JOIN sku_spec as ss on ss.sku_code = sku.sku_code and ss.spec_value_id = sv.id
     WHERE item.is_disable = FALSE and sku.is_disable = FALSE  and item.item_code = #{itemCode}  AND itms.spec_id = #{specId};
   </select>
+
+  <insert id="batchInsert">
+    INSERT INTO item_spec (item_code, spec_id)  VALUES
+    <foreach collection="images" item="item" index="index" separator=",">
+      values (#{itemCode,jdbcType=VARCHAR}, #{specId,jdbcType=BIGINT})
+    </foreach>
+  </insert>
 </mapper>

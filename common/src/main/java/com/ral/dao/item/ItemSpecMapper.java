@@ -97,5 +97,9 @@ public interface ItemSpecMapper {
     int updateByPrimaryKey(ItemSpec record);
 
 
+    int batchInsert(ItemSpec spec);
+
+
+
     int selectActiveByItemCodeAndSpecId(@Param("itemCode")String itemCode,@Param("specId") Long specId);
 }

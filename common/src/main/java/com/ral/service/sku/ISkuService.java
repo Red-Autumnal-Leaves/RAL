@@ -23,6 +23,6 @@ public interface ISkuService {
 
     List<SkuDto> selectDtoByItemCode(String itemCode);
 
-    List<Sku> selectByItemCode(List<String> itemCodes);
+    List<Sku> selectByItemCodes(List<String> itemCodes);
 }
 
