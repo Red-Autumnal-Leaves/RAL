@@ -68,6 +68,9 @@ public class SpecServiceImpl implements ISpecService{
 
     @Override
     public List<SpecDto> selectDtoByIds(List<Long> specIds) {
+        if(specIds == null || specIds.isEmpty()){
+            return new ArrayList<>();
+        }
         SpecExample example = new SpecExample();
         example.createCriteria().andIdIn(specIds);
         List<Spec> specs = selectByExample(example);

@@ -166,11 +166,11 @@ public class ItemDto implements Serializable {
         this.keywords = keywords;
     }
 
-    public Boolean getVirtual() {
+    public Boolean getIsVirtual() {
         return isVirtual;
     }
 
-    public void setVirtual(Boolean virtual) {
+    public void setIsVirtual(Boolean virtual) {
         isVirtual = virtual;
     }
 

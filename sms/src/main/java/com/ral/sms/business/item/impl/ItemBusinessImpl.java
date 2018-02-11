@@ -31,6 +31,7 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -163,6 +164,7 @@ public class ItemBusinessImpl implements ItemBusiness {
         String itemCode = idGeneraterService.generate(IdTypeEnums.ITEM);
         item.setItemCode(itemCode);
         item.setIsDisable(false);
+        item.setCreateUser(manager.getUserName());
         if(itemService.insertSelective(item) > 0){
             return detail(request,itemCode);
         }
@@ -177,10 +179,18 @@ public class ItemBusinessImpl implements ItemBusiness {
             return Result.initErrorResult(HttpStatusEnum.BAD_REQUEST,"The 'itemCode' " + itemCode + " is not exits");
         }
         Item item = JSONUtils.toBean(body,Item.class);
-        item.setItemCode(itemCode);
-        item.setCategoryId(entity.getCategoryId());
-        item.setIsDisable(false);
-        item.setLastUpdateUser(manager.getUserName());
+        {
+            item.setItemCode(itemCode);
+            item.setCategoryId(entity.getCategoryId());
+            item.setIsDisable(false);
+            item.setLastUpdateUser(manager.getUserName());
+            item.setId(entity.getId());
+            item.setSellerNote(StringUtils.isNullOrEmpty(item.getSellerNote()) ? "" : item.getSellerNote());
+            item.setCreateTime(entity.getCreateTime());
+            item.setCreateUser(entity.getCreateUser());
+            item.setCreateUser(item.getCreateUser());
+            item.setLastUpdateTime(new Date());
+        }
         if(itemService.update(item) > 0){
             return detail(request,itemCode);
         }
