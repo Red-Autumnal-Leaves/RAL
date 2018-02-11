@@ -22,6 +22,8 @@ public interface ISpecService {
 
     List<SpecDto> selectDtoByCategoryId(Long categoryId);
 
+    List<SpecDto> selectDtoByIds(List<Long> specIds);
+
     int insert(Spec spec);
 
     boolean insert(SpecDto spec);

@@ -15,9 +15,16 @@ public interface ItemBusiness {
 
     Result detail(HttpServletRequest request,String itemCode);
 
+    Result specs(HttpServletRequest request,  String itemCode);
+
+    Result skus(HttpServletRequest request, String itemCode);
+
     Result save(HttpServletRequest request, String body, Manager manager);
 
     Result update(HttpServletRequest request,String itemCode, String body, Manager manager);
+
+
+
 
 
 }

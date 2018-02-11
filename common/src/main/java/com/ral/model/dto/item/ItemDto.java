@@ -2,6 +2,7 @@ package com.ral.model.dto.item;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.ral.model.dto.sku.SkuDto;
+import com.ral.model.dto.spec.SpecDto;
 import com.ral.util.date.DateUtils;
 
 import java.io.Serializable;
@@ -66,6 +67,8 @@ public class ItemDto implements Serializable {
     private List<ItemImageDto> images = new ArrayList<>();
 
     private List<SkuDto> skus = new ArrayList<>();
+
+    private List<SpecDto> specs = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -275,5 +278,13 @@ public class ItemDto implements Serializable {
 
     public void setSkus(List<SkuDto> skus) {
         this.skus = skus;
+    }
+
+    public List<SpecDto> getSpecs() {
+        return specs;
+    }
+
+    public void setSpecs(List<SpecDto> specs) {
+        this.specs = specs;
     }
 }

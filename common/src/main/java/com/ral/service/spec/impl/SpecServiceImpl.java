@@ -67,6 +67,14 @@ public class SpecServiceImpl implements ISpecService{
     }
 
     @Override
+    public List<SpecDto> selectDtoByIds(List<Long> specIds) {
+        SpecExample example = new SpecExample();
+        example.createCriteria().andIdIn(specIds);
+        List<Spec> specs = selectByExample(example);
+        return convertToDto(specs);
+    }
+
+    @Override
     public int insert(Spec spec) {
         return specMapper.insertSelective(spec);
     }

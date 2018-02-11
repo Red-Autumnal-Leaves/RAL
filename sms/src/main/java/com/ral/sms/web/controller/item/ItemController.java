@@ -21,16 +21,49 @@ public class ItemController {
     @Autowired
     private ItemBusiness itemBusiness;
 
+    /**
+     * 分页查询
+     * @param request
+     * @param query
+     * @return
+     */
     @RequestMapping(value =  "/query",method = RequestMethod.GET)
     public Result query(HttpServletRequest request, ItemQuery query){
         return itemBusiness.query(request,query);
     }
 
+    /**
+     * 查询详情
+     * @param request
+     * @param itemCode
+     * @return
+     */
     @RequestMapping(value =  "/detail/{itemCode}",method = RequestMethod.GET)
     public Result detail(HttpServletRequest request,@PathVariable("itemCode")String itemCode){
         return itemBusiness.detail(request,itemCode);
     }
 
+    /**
+     * 查询商品的规格
+     * @param request
+     * @param itemCode
+     * @return
+     */
+    @RequestMapping(value =  "/spec/{itemCode}",method = RequestMethod.GET)
+    public Result spcs(HttpServletRequest request,String itemCode){
+        return itemBusiness.specs(request,itemCode);
+    }
+
+    /**
+     * 查询SKU
+     * @param request
+     * @param itemCode
+     * @return
+     */
+    @RequestMapping("/skus")
+    public Result skus(HttpServletRequest request,String itemCode){
+        return null;
+    }
 
 
 }
