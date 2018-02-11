@@ -95,4 +95,7 @@ public interface ItemSpecMapper {
      * @mbggenerated
      */
     int updateByPrimaryKey(ItemSpec record);
+
+
+    int selectActiveByItemCodeAndSpecId(@Param("itemCode")String itemCode,@Param("specId") Long specId);
 }

@@ -19,9 +19,13 @@ public interface ItemBusiness {
 
     Result skus(HttpServletRequest request, String itemCode);
 
+    Result removeSpec(HttpServletRequest request,String itemCode,Long specId);
+
     Result save(HttpServletRequest request, String body, Manager manager);
 
     Result update(HttpServletRequest request,String itemCode, String body, Manager manager);
+
+
 
 
 

@@ -50,7 +50,7 @@ public class ItemController {
      * @return
      */
     @RequestMapping(value =  "/spec/{itemCode}",method = RequestMethod.GET)
-    public Result spcs(HttpServletRequest request,String itemCode){
+    public Result specs(HttpServletRequest request,@PathVariable("itemCode")String itemCode){
         return itemBusiness.specs(request,itemCode);
     }
 
@@ -60,9 +60,21 @@ public class ItemController {
      * @param itemCode
      * @return
      */
-    @RequestMapping("/skus")
-    public Result skus(HttpServletRequest request,String itemCode){
-        return null;
+    @RequestMapping("/sku/{itemCode}")
+    public Result sku(HttpServletRequest request,@PathVariable("itemCode")String itemCode){
+        return itemBusiness.skus(request,itemCode);
+    }
+
+    /**
+     * 移除商品规格关联
+     * @param request
+     * @param itemCode
+     * @param specId
+     * @return
+     */
+    @RequestMapping("/remove/{itemCode}/spec/{specId}")
+    public Result removeSpec(HttpServletRequest request,@PathVariable("itemCode")String itemCode,@PathVariable("specId")Long specId){
+        return itemBusiness.removeSpec(request,itemCode,specId);
     }
 
 

@@ -33,6 +33,14 @@ public class ItemSpecServiceImpl implements ItemSpecService {
     }
 
     @Override
+    public ItemSpec selectByItemCodeAndSpecId(String itemCode, Long specId) {
+        ItemSpecExample example = new ItemSpecExample();
+        example.createCriteria().andItemCodeEqualTo(itemCode).andSpecIdEqualTo(specId);
+        List<ItemSpec> specs = itemSpecMapper.selectByExample(example);
+        return specs == null || specs.isEmpty() ? null : specs.get(0);
+    }
+
+    @Override
     public List<ItemSpec> selectByItemCode(String itemCode) {
         ItemSpecExample example = new ItemSpecExample();
         example.createCriteria().andItemCodeEqualTo(itemCode);
@@ -75,5 +83,17 @@ public class ItemSpecServiceImpl implements ItemSpecService {
         ItemSpecExample example = new ItemSpecExample();
         example.createCriteria().andIdIn(ids);
         itemSpecMapper.deleteByExample(example);
+    }
+
+    /**
+     * 查询 item 规格被sku关联数量
+     *
+     * @param itemCode
+     * @param specId
+     * @return
+     */
+    @Override
+    public int selectActiveByItemCodeAndSpecId(String itemCode, Long specId) {
+        return 0;
     }
 }

@@ -4,8 +4,10 @@ import com.ral.model.auth.res.Manager;
 import com.ral.model.dto.item.ItemDto;
 import com.ral.model.dto.sku.SkuDto;
 import com.ral.model.dto.sku.SkuSpecDto;
+import com.ral.model.entity.item.Item;
 import com.ral.model.entity.item.ItemDetail;
 import com.ral.model.entity.item.ItemSpec;
+import com.ral.model.enums.HttpStatusEnum;
 import com.ral.model.query.Query;
 import com.ral.model.query.item.ItemQuery;
 import com.ral.model.res.Result;
@@ -109,6 +111,22 @@ public class ItemBusinessImpl implements ItemBusiness {
 
 
 
+
+
+    @Override
+    public Result removeSpec(HttpServletRequest request, String itemCode, Long specId) {
+        Item item = itemService.selectByItemCode(itemCode);
+        if(item == null){
+            return Result.initErrorResult(HttpStatusEnum.BAD_REQUEST,"The 'itemCode' " + itemCode + " is not exits");
+        }
+        int count = itemSpecService.selectActiveByItemCodeAndSpecId(itemCode,specId);
+        if(count > 0){
+            return Result.initErrorResult(HttpStatusEnum.BAD_REQUEST,"The spec is already used");
+        }
+        itemSpecService.remove(itemCode,specId);
+        return Result.initSuccessResult(null,null);
+    }
+
     @Override
     public Result save(HttpServletRequest request, String body, Manager manager) {
         return null;
@@ -118,6 +136,7 @@ public class ItemBusinessImpl implements ItemBusiness {
     public Result update(HttpServletRequest request, String itemCode, String body, Manager manager) {
         return null;
     }
+
 
 
 }

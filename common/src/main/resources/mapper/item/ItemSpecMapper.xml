@@ -269,4 +269,14 @@
       last_updatetime = #{lastUpdatetime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  
+  <select id="selectActiveByItemCodeAndSpecId" resultType="int">
+    select count(1)
+    from  sku
+        INNER JOIN item on item.item_code = sku.item_code
+        INNER JOIN item_spec as itms on itms.item_code  = item.item_code
+        INNER JOIN spec_value as sv on sv.spec_id = itms.spec_id
+        INNER JOIN sku_spec as ss on ss.sku_code = sku.sku_code and ss.spec_value_id = sv.id
+    WHERE item.is_disable = FALSE and sku.is_disable = FALSE  and item.item_code = #{itemCode}  AND itms.spec_id = #{specId};
+  </select>
 </mapper>
